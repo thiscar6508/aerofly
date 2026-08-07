@@ -66,28 +66,34 @@
       }
     }
 
-    /* 手機點擊時產生的三角翼小圖示樣式 */
+    /* 手機點擊時產生的三角翼小圖示樣式 (加大 + 延長停留 + 發光感) */
     .touch-cursor {
       position: fixed;
       pointer-events: none;
       z-index: 10000;
-      width: 40px;
-      height: 40px;
+      width: 65px;
+      height: 65px;
       background: url('cursor-left.png') center/contain no-repeat;
+      filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.8)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
       transform: translate(-50%, -50%);
-      animation: touchPop 0.6s ease-out forwards;
+      animation: touchPop 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
     }
     @keyframes touchPop {
       0% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3) rotate(-10deg);
       }
-      50% {
-        transform: translate(-50%, -50%) scale(1.1);
+      15% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.15) rotate(0deg);
+      }
+      70% {
+        opacity: 1;
+        transform: translate(-50%, -60%) scale(1);
       }
       100% {
         opacity: 0;
-        transform: translate(-50%, -50%) scale(0.5);
+        transform: translate(-50%, -80%) scale(0.7);
       }
     }
   </style>
@@ -192,7 +198,7 @@
         <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/40 transition">
           <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">🖥️</div>
           <h3 class="text-xl font-bold text-white mb-3">智慧雙模航電儀表</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">配備 <strong class="text-slate-200">MGL 數位玻璃座艙</strong>（可升級 8.5 吋 iEFIS 觸控屏），整合 GPS 移動地圖與 <strong class="text-amber-400">RDAC 引擎即時監控系統</strong>（CHT/EGT/油壓/油耗），數據精確掌握、一目了然。</p>
+          <p class="text-slate-400 text-sm leading-relaxed">配備 <strong class="text-slate-200">MGL 數位屏</strong>（可升級 8.5 吋 iEFIS 觸控屏），整合 GPS 與 <strong class="text-amber-400">RDAC 引擎即時監控系統</strong>（CHT/EGT/油壓/油耗），數據精確掌握、一目了然。</p>
         </div>
       </div>
     </div>
@@ -445,7 +451,7 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 腳本區域：切換 CSS Class 鼠標方向 + 影片切換 + 白光軌跡 + 手機觸控飄圖案 -->
+  <!-- 腳本區域：切換 CSS Class 鼠標方向 + 影片切換 + 白光軌跡 + 手機觸控浮現大圖案 -->
   <script>
     // 預載圖片以防瀏覽器延遲
     const preloadLeft = new Image(); preloadLeft.src = 'cursor-left.png';
@@ -519,7 +525,7 @@
       createGlowDot(currentX, currentY);
     });
 
-    // 4. 手機端：點擊/按壓螢幕時浮現 cursor-left.png 圖案
+    // 4. 手機端：點擊/按壓螢幕時浮現顯眼的 cursor-left.png 圖案 (加大 + 停留 1.2 秒)
     document.addEventListener('touchstart', function(e) {
       if (e.touches.length > 0) {
         const touch = e.touches[0];
@@ -529,7 +535,7 @@
         icon.style.top = touch.clientY + 'px';
 
         document.body.appendChild(icon);
-        setTimeout(() => { icon.remove(); }, 600);
+        setTimeout(() => { icon.remove(); }, 1200); // 配合 1.2 秒動畫時間
       }
     }, { passive: true });
 
