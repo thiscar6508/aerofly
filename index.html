@@ -19,6 +19,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
   
   <style>
+    /* 預設鼠標樣式，會透過 JavaScript 動態切換圖檔 */
+    body, a, button, input, select, textarea {
+      cursor: url('cursor-right.png') 16 16, auto !important;
+    }
+
     body { font-family: 'Noto Sans TC', sans-serif; }
     .hero-bg {
       background: linear-gradient(180deg, rgba(10, 15, 30, 0.85) 0%, rgba(5, 7, 15, 0.98) 100%), 
@@ -28,6 +33,25 @@
       background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    /* 星星閃爍動態樣式 */
+    .star-trail {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      animation: starFade 0.8s ease-out forwards;
+      user-select: none;
+    }
+    @keyframes starFade {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -10px) scale(0.2) rotate(180deg);
+      }
     }
   </style>
 </head>
@@ -79,7 +103,7 @@
     </div>
   </section>
 
-  <!-- 精彩實景三影片展示區 (可切換 3 個視角) -->
+  <!-- 精彩實景三影片展示區 -->
   <section id="video-section" class="py-16 bg-slate-950 border-b border-slate-800/80 px-6">
     <div class="max-w-4xl mx-auto text-center">
       <span class="text-amber-400 text-xs font-bold tracking-widest uppercase mb-2 block">First-Person View</span>
@@ -101,7 +125,7 @@
         </button>
       </div>
 
-      <!-- 影片播放器容器（自動切換直式/橫式比例） -->
+      <!-- 影片播放器容器 -->
       <div id="videoContainer" class="relative w-full max-w-sm md:max-w-md mx-auto rounded-3xl overflow-hidden border border-slate-800 shadow-2xl shadow-amber-500/10 bg-black aspect-[9/16] transition-all duration-300">
         <video id="mainVideo" class="w-full h-full object-contain" autoplay loop muted playsinline controls>
           <source id="videoSource" src="flight-video.mp4" type="video/mp4">
@@ -120,35 +144,20 @@
         <p class="text-slate-400">每一處細節，皆源自對航太安全的嚴格堅持</p>
       </div>
       <div class="grid md:grid-cols-3 gap-8">
-        <!-- 亮點 1 -->
         <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/40 transition">
-          <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">
-            🛡️
-          </div>
+          <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">🛡️</div>
           <h3 class="text-xl font-bold text-white mb-3">航太級高韌性結構</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">
-            採用 <strong class="text-slate-200">4130 鉻鉬鋼</strong>高強度主架與 <strong class="text-slate-200">7075-T6 實心鋁合金起落架</strong>，經精密 TIG 焊接。結合抗 UV 高張力翼布，通過嚴格 <strong class="text-amber-400">ASTM 輕型運動航空器認證</strong>，提供極致抗過載與防腐蝕防護。
-          </p>
+          <p class="text-slate-400 text-sm leading-relaxed">採用 <strong class="text-slate-200">4130 鉻鉬鋼</strong>高強度主架與 <strong class="text-slate-200">7075-T6 實心鋁合金起落架</strong>，經精密 TIG 焊接。結合抗 UV 高張力翼布，通過嚴格 <strong class="text-amber-400">ASTM 輕型運動航空器認證</strong>。</p>
         </div>
-        <!-- 亮點 2 -->
         <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/40 transition">
-          <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">
-            ⚡
-          </div>
+          <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">⚡</div>
           <h3 class="text-xl font-bold text-white mb-3">澎湃動力輸出</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">
-            搭載專業級 <strong class="text-slate-200">Rotax 912 系列四汽缸航空引擎</strong>，提供高達 <strong class="text-amber-400">100 匹馬力</strong>與極致推重比。滿載狀態下仍能以 <strong class="text-slate-200">1,180 FPM</strong> 驚人爬升率直衝雲霄。
-          </p>
+          <p class="text-slate-400 text-sm leading-relaxed">搭載專業級 <strong class="text-slate-200">Rotax 912 系列四汽缸航空引擎</strong>，提供高達 <strong class="text-amber-400">100 匹馬力</strong>與極致推重比，輕鬆實現穩定快速爬升。</p>
         </div>
-        <!-- 亮點 3 -->
         <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/40 transition">
-          <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">
-            🖥️
-          </div>
+          <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">🖥️</div>
           <h3 class="text-xl font-bold text-white mb-3">智慧雙模航電儀表</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">
-            配備 <strong class="text-slate-200">MGL 數位玻璃座艙</strong>（可升級 8.5 吋 iEFIS 觸控屏），整合 GPS 移動地圖與 <strong class="text-amber-400">RDAC 引擎即時監控系統</strong>（CHT/EGT/油壓/油耗），數據精確掌握、一目了然。
-          </p>
+          <p class="text-slate-400 text-sm leading-relaxed">配備 <strong class="text-slate-200">MGL 數位玻璃座艙</strong>，整合 GPS 移動地圖與 <strong class="text-amber-400">RDAC 引擎即時監控系統</strong>，飛行數據一目了然。</p>
         </div>
       </div>
     </div>
@@ -162,7 +171,6 @@
     </div>
     
     <div class="grid md:grid-cols-2 gap-8 mb-12">
-      <!-- 方案 1: 體驗飛行 -->
       <div class="bg-slate-900 rounded-2xl p-8 border border-slate-800 hover:border-amber-500/50 transition flex flex-col justify-between">
         <div>
           <span class="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-semibold rounded-md mb-4">入門首選</span>
@@ -173,13 +181,11 @@
             <li class="flex items-center gap-2">✓ 實際空中飛行時間 15 分鐘</li>
             <li class="flex items-center gap-2">✓ 可攜帶手機及拍攝用具盡情美拍</li>
             <li class="flex items-center gap-2">✓ 頭手可自由伸出機外感受風速</li>
-            <li class="flex items-center gap-2">✓ 適合初次體驗高空視野者</li>
           </ul>
         </div>
         <a href="#booking" class="w-full text-center bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl transition border border-slate-700">預約體驗飛行</a>
       </div>
 
-      <!-- 方案 2: 暢遊飛行 -->
       <div class="bg-slate-900 rounded-2xl p-8 border-2 border-amber-500/80 relative shadow-xl shadow-amber-500/10 flex flex-col justify-between">
         <span class="absolute -top-3 right-6 bg-amber-500 text-slate-950 text-xs font-black px-3 py-1 rounded-full uppercase">熱門推薦</span>
         <div>
@@ -198,7 +204,6 @@
       </div>
     </div>
 
-    <!-- 體驗地點與限制資訊卡片 -->
     <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="space-y-2">
         <h4 class="text-lg font-bold text-white flex items-center gap-2">📍 體驗地點與須知</h4>
@@ -223,79 +228,52 @@
           <div>
             <span class="px-3 py-1 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-md text-xs font-bold mb-3 inline-block">專業駕訓班</span>
             <h3 class="text-3xl font-bold text-white">首航圓夢價 <span class="text-amber-400 text-4xl font-black ml-2">NT$ 368,000</span> 元</h3>
-            <p class="text-slate-400 text-sm mt-2">完整系統化教學，實現獨自翱翔天際的飛行夢想</p>
           </div>
           <a href="#booking" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-8 py-4 rounded-xl text-lg transition shadow-xl shadow-amber-500/20 shrink-0">
             立即報名駕訓課程
           </a>
         </div>
 
-        <!-- 課程核心配額 -->
         <div class="grid md:grid-cols-2 gap-6 mb-10">
           <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex items-center gap-5">
             <div class="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl shrink-0">📖</div>
             <div>
               <p class="text-slate-400 text-xs font-semibold">理論基礎</p>
               <h4 class="text-2xl font-bold text-white">學科課程 <span class="text-amber-400">20 小時</span></h4>
-              <p class="text-slate-400 text-xs mt-1">氣象學、航空法規、氣流與飛行原理全解析</p>
             </div>
           </div>
-
           <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex items-center gap-5">
             <div class="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl shrink-0">🛩️</div>
             <div>
               <p class="text-slate-400 text-xs font-semibold">實機操控</p>
               <h4 class="text-2xl font-bold text-white">術科飛行訓練 <span class="text-amber-400">15 小時</span></h4>
-              <p class="text-slate-400 text-xs mt-1">國家級專業教練雙座手把手帶飛教導</p>
             </div>
-          </div>
-        </div>
-
-        <!-- 彈性選購與限時優惠 -->
-        <div class="grid md:grid-cols-3 gap-6 text-sm">
-          <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800">
-            <p class="text-amber-400 font-bold mb-1">💡 彈性選購時數</p>
-            <p class="text-slate-300 text-xs leading-relaxed">提供 <strong>15 小時特殊優惠價</strong>。初階完成後，可依個人進度彈性加購優惠飛行時數。</p>
-          </div>
-          <div class="bg-amber-500/10 p-5 rounded-xl border border-amber-500/30">
-            <p class="text-amber-400 font-bold mb-1">🎁 限時報名特惠</p>
-            <p class="text-slate-200 text-xs leading-relaxed">報名 2 個月內完成學科，<strong>贈送 2 次體驗飛行</strong>！</p>
-          </div>
-          <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800">
-            <p class="text-amber-400 font-bold mb-1">全包式服務保障</p>
-            <p class="text-slate-300 text-xs leading-relaxed">費用已含<strong>飛行場地年度會員費</strong>與<strong>飛行考證報名費用</strong>。</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 民航局檢驗合格證與合規資訊 (Certification & Compliance) -->
+  <!-- 民航局檢驗合格證與合規資訊 -->
   <section id="certification" class="py-24 px-6 max-w-5xl mx-auto">
     <div class="text-center mb-16">
       <span class="text-amber-400 text-xs font-bold tracking-widest uppercase mb-2 block">Safety & Compliance</span>
       <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">合法合規 · 國家級安心保障</h2>
-      <p class="text-slate-400">本公司營運載具完全符合交通部民用航空局法規標準，具備完整檢驗合格證</p>
     </div>
-
     <div class="bg-slate-900 rounded-3xl border border-slate-800 p-8 md:p-10 shadow-xl">
       <div class="flex items-center gap-4 mb-8 border-b border-slate-800 pb-6">
-        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-2xl font-bold">
-          📜
-        </div>
+        <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center text-2xl font-bold">📜</div>
         <div>
           <h3 class="text-xl font-bold text-white">交通部民用航空局 超輕型載具檢驗合格證</h3>
           <p class="text-xs text-slate-400 mt-1">合格證號碼：<span class="text-amber-400 font-mono font-semibold">CAA-114-022</span>｜管制號碼：<span class="text-amber-400 font-mono font-semibold">JJ1111</span></p>
         </div>
       </div>
-
       <div class="grid md:grid-cols-2 gap-6 text-sm">
         <div class="space-y-3 bg-slate-950 p-6 rounded-2xl border border-slate-800">
           <p class="text-slate-400"><strong class="text-slate-200">美國製造廠：</strong>Evolution Aircraft</p>
           <p class="text-slate-400"><strong class="text-slate-200">載具機型：</strong>REVO</p>
           <p class="text-slate-400"><strong class="text-slate-200">航空引擎型號：</strong>Rotax 912ULS</p>
         </div>
-
         <div class="space-y-3 bg-slate-950 p-6 rounded-2xl border border-slate-800">
           <p class="text-slate-400"><strong class="text-slate-200">最大起飛重量：</strong>482 公斤</p>
           <p class="text-slate-400"><strong class="text-slate-200">操作限制：</strong>限日間、目視天氣條件下操作</p>
@@ -310,11 +288,8 @@
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">國家級專業教練</h2>
-        <p class="text-slate-400">超過 40 年航太飛行經驗，帶您安心飛上藍天</p>
       </div>
-
       <div class="bg-slate-950 border border-slate-800 rounded-3xl p-8 md:p-12">
-        <!-- 數據大牌 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 text-center border-b border-slate-800 pb-8">
           <div>
             <p class="text-3xl md:text-4xl font-black text-amber-400">5,151+</p>
@@ -322,7 +297,7 @@
           </div>
           <div>
             <p class="text-3xl md:text-4xl font-black text-amber-400">40+</p>
-            <p class="text-xs text-slate-400 mt-1">年總飛行資歷 (自1981起)</p>
+            <p class="text-xs text-slate-400 mt-1">年總飛行資歷</p>
           </div>
           <div>
             <p class="text-3xl md:text-4xl font-black text-amber-400">亞運</p>
@@ -331,29 +306,6 @@
           <div>
             <p class="text-3xl md:text-4xl font-black text-amber-400">CAA</p>
             <p class="text-xs text-slate-400 mt-1">民航局委任測驗人員</p>
-          </div>
-        </div>
-
-        <!-- 履歷清單 -->
-        <div class="grid md:grid-cols-2 gap-8 text-sm">
-          <div>
-            <h4 class="text-base font-bold text-amber-400 mb-4 flex items-center gap-2">🎖️ 歷任重要職務</h4>
-            <ul class="space-y-2.5 text-slate-300">
-              <li>• 中華民國飛行運動總會 常務監事</li>
-              <li>• 教育部體育署無動力專業人員-指導員</li>
-              <li>• 台灣飛行大玩家運動協會教練</li>
-              <li>• 前 CAA 交通部民航局委任測驗人員</li>
-              <li>• 2018 第18屆亞運會（印尼雅加達）飛行傘帶隊教練</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-base font-bold text-amber-400 mb-4 flex items-center gap-2">🌍 國際賽事與國家代表隊資歷</h4>
-            <ul class="space-y-2.5 text-slate-300">
-              <li>• FAI 世界盃滑翔翼錦標賽 中華台北國家代表隊（美國、西班牙、澳洲賽事）</li>
-              <li>• 第一屆世界航空運動會 (1st. World Air Games 土耳其) 滑翔翼國家代表隊員</li>
-              <li>• PWC 飛行傘世界盃會前賽 (日本) 中華台北代表隊</li>
-              <li>• FAI 世界盃 / 亞太盃動力飛行傘錦標賽 (泰國) 仲裁委員</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -365,9 +317,7 @@
     <div class="max-w-xl mx-auto bg-slate-950 p-8 sm:p-10 rounded-3xl border border-slate-800 shadow-2xl">
       <div class="text-center mb-8">
         <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">預約飛行體驗 / 駕訓諮詢</h2>
-        <p class="text-slate-400 text-sm">請留下您的聯絡資訊，飛行顧問將於 24 小時內與您聯繫確認時刻</p>
       </div>
-
       <form id="contactForm" class="space-y-4">
         <div>
           <label class="block text-xs font-semibold text-slate-300 mb-1">您的姓名</label>
@@ -383,19 +333,12 @@
             <option>體驗飛行（15分鐘 / 三地門方向）</option>
             <option>暢遊飛行（30分鐘 / 六龜方向）</option>
             <option>初階啟航訓練課程（飛行駕訓班）</option>
-            <option>動力三角翼QA與考照諮詢</option>
           </select>
-        </div>
-        <div>
-          <label class="block text-xs font-semibold text-slate-300 mb-1">備註或特殊需求（選填）</label>
-          <textarea rows="3" placeholder="例如：預計體驗日期、希望飛得刺激一點..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 transition"></textarea>
         </div>
         <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-4 rounded-xl shadow-lg shadow-amber-500/20 transition text-lg mt-2">
           送出預約申請
         </button>
       </form>
-      
-      <!-- 表單送出成功提示訊息 -->
       <div id="successMsg" class="hidden mt-6 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-center text-emerald-400 text-sm">
         ✓ 預約申請已成功送出！我們的飛行顧問會盡快聯繫您。
       </div>
@@ -407,38 +350,79 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 影片切換與表單送出邏輯腳本 -->
+  <!-- 互動特效與切換邏輯腳本 -->
   <script>
-    // 影片切換邏輯 (支援直式/橫式自動切換外框)
+    // 1. 三影片切換邏輯
     function switchVideo(videoSrc, mode, activeBtnId) {
       const videoPlayer = document.getElementById('mainVideo');
       const videoSource = document.getElementById('videoSource');
       const container = document.getElementById('videoContainer');
       const allBtns = ['btn-video1', 'btn-video2', 'btn-video3'];
 
-      // 按鈕樣式歸零
       allBtns.forEach(btnId => {
         const btn = document.getElementById(btnId);
         btn.className = "px-5 py-2.5 rounded-full text-sm font-bold bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-500/50 transition";
       });
 
-      // 設定當前點擊按鈕高亮
       document.getElementById(activeBtnId).className = "px-5 py-2.5 rounded-full text-sm font-bold bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 transition";
 
-      // 調整外框長寬比例 (橫式: aspect-video, 直式: aspect-[9/16])
       if (mode === 'landscape') {
         container.className = "relative w-full max-w-2xl md:max-w-3xl mx-auto rounded-3xl overflow-hidden border border-slate-800 shadow-2xl shadow-amber-500/10 bg-black aspect-video transition-all duration-300";
       } else {
         container.className = "relative w-full max-w-sm md:max-w-md mx-auto rounded-3xl overflow-hidden border border-slate-800 shadow-2xl shadow-amber-500/10 bg-black aspect-[9/16] transition-all duration-300";
       }
 
-      // 更換來源並播放
       videoSource.src = videoSrc;
       videoPlayer.load();
       videoPlayer.play();
     }
 
-    // 表單送出事件
+    // 2. 動態滑鼠鼠標切換（左移/右移/上下滑動）與星星軌跡
+    let lastX = window.innerWidth / 2;
+    let lastY = window.innerHeight / 2;
+    let lastTime = 0;
+    const starIcons = ['✨', '⭐', '💫', '✦', '✧'];
+    const starColors = ['#f59e0b', '#fbbf24', '#fef08a', '#ffffff'];
+
+    document.addEventListener('mousemove', function(e) {
+      const currentX = e.clientX;
+      const currentY = e.clientY;
+      const deltaX = currentX - lastX;
+      const deltaY = currentY - lastY;
+
+      // 判斷移動方向來更換鼠標圖案
+      if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 5) {
+        // 上下滑動用圖3 (正面圖)
+        document.body.style.cursor = "url('cursor-vertical.png') 16 16, auto";
+      } else if (deltaX < -2) {
+        // 往左移用圖1 (左向圖)
+        document.body.style.cursor = "url('cursor-left.png') 16 16, auto";
+      } else if (deltaX > 2) {
+        // 往右移用圖2 (右向圖)
+        document.body.style.cursor = "url('cursor-right.png') 16 16, auto";
+      }
+
+      lastX = currentX;
+      lastY = currentY;
+
+      // 星星軌跡粒子特效
+      const now = Date.now();
+      if (now - lastTime > 40) {
+        lastTime = now;
+        const star = document.createElement('span');
+        star.className = 'star-trail';
+        star.innerText = starIcons[Math.floor(Math.random() * starIcons.length)];
+        star.style.color = starColors[Math.floor(Math.random() * starColors.length)];
+        star.style.left = currentX + (Math.random() * 12 - 6) + 'px';
+        star.style.top = currentY + (Math.random() * 12 - 6) + 'px';
+        star.style.fontSize = (Math.random() * 12 + 10) + 'px';
+
+        document.body.appendChild(star);
+        setTimeout(() => { star.remove(); }, 800);
+      }
+    });
+
+    // 3. 表單送出事件
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       document.getElementById('contactForm').reset();
