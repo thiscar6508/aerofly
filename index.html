@@ -19,9 +19,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
   
   <style>
-    /* 設定預設自訂鼠標（精確指定 16 16 中心熱點） */
+    /* 預設鼠標樣式 */
     body, a, button, input, select, textarea {
-      cursor: url('cursor-right.png') 16 16, pointer !important;
+      cursor: url('cursor-right.png') 16 16, auto !important;
     }
 
     body { font-family: 'Noto Sans TC', sans-serif; }
@@ -112,7 +112,6 @@
       <span class="text-amber-400 text-xs font-bold tracking-widest uppercase mb-2 block">First-Person View</span>
       <h2 class="text-2xl md:text-3xl font-bold text-white mb-6">第一人稱視角 · 震撼實景呈現</h2>
       
-      <!-- 三影片切換按鈕 -->
       <div class="flex flex-wrap justify-center gap-3 mb-8">
         <button id="btn-video1" onclick="switchVideo('flight-video.mp4', 'portrait', 'btn-video1')" 
                 class="px-5 py-2.5 rounded-full text-sm font-bold bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 transition">
@@ -128,7 +127,6 @@
         </button>
       </div>
 
-      <!-- 影片播放器容器 -->
       <div id="videoContainer" class="relative w-full max-w-sm md:max-w-md mx-auto rounded-3xl overflow-hidden border border-slate-800 shadow-2xl shadow-amber-500/10 bg-black aspect-[9/16] transition-all duration-300">
         <video id="mainVideo" class="w-full h-full object-contain" autoplay loop muted playsinline controls>
           <source id="videoSource" src="flight-video.mp4" type="video/mp4">
@@ -353,8 +351,13 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 腳本區域：影片切換 + 電腦方向鼠標 + 手機觸控點點白光軌跡 -->
+  <!-- 腳本區域：預載鼠標圖片 + 強化版切換邏輯 -->
   <script>
+    // 預載圖片以防瀏覽器延遲
+    const preloadLeft = new Image(); preloadLeft.src = 'cursor-left.png';
+    const preloadRight = new Image(); preloadRight.src = 'cursor-right.png';
+    const preloadVert = new Image(); preloadVert.src = 'cursor-vertical.png';
+
     // 1. 三影片切換邏輯
     function switchVideo(videoSrc, mode, activeBtnId) {
       const videoPlayer = document.getElementById('mainVideo');
@@ -379,24 +382,20 @@
       videoPlayer.play();
     }
 
-    // 2. 高級感「點點白光」粒子生成器 (支援電腦 mousemove 與手機 touchmove)
+    // 2. 高級感「點點白光」粒子生成器
     let lastX = window.innerWidth / 2;
     let lastY = window.innerHeight / 2;
     let lastTime = 0;
 
     function createGlowDot(x, y) {
       const now = Date.now();
-      if (now - lastTime > 30) { // 控制光點產生密度
+      if (now - lastTime > 30) {
         lastTime = now;
         const dot = document.createElement('div');
         dot.className = 'glow-dot';
-        
-        // 隨機光點大小 (8px ~ 16px)
         const size = Math.random() * 8 + 8;
         dot.style.width = size + 'px';
         dot.style.height = size + 'px';
-        
-        // 座標微調
         dot.style.left = x + 'px';
         dot.style.top = y + 'px';
 
@@ -405,20 +404,23 @@
       }
     }
 
-    // 電腦端事件：更新鼠標圖樣與產生白光
+    // 電腦端 mousemove 切換游標與軌跡
     document.addEventListener('mousemove', function(e) {
       const currentX = e.clientX;
       const currentY = e.clientY;
       const deltaX = currentX - lastX;
       const deltaY = currentY - lastY;
 
-      // 判斷移動方向切換電腦鼠標圖案
-      if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 5) {
-        document.body.style.cursor = "url('cursor-vertical.png') 16 16, pointer";
+      // 當方向變化時設定 cursor 屬性
+      if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 4) {
+        document.documentElement.style.cursor = "url('cursor-vertical.png') 16 16, auto";
+        document.body.style.cursor = "url('cursor-vertical.png') 16 16, auto";
       } else if (deltaX < -2) {
-        document.body.style.cursor = "url('cursor-left.png') 16 16, pointer";
+        document.documentElement.style.cursor = "url('cursor-left.png') 16 16, auto";
+        document.body.style.cursor = "url('cursor-left.png') 16 16, auto";
       } else if (deltaX > 2) {
-        document.body.style.cursor = "url('cursor-right.png') 16 16, pointer";
+        document.documentElement.style.cursor = "url('cursor-right.png') 16 16, auto";
+        document.body.style.cursor = "url('cursor-right.png') 16 16, auto";
       }
 
       lastX = currentX;
@@ -427,7 +429,7 @@
       createGlowDot(currentX, currentY);
     });
 
-    // 手機端事件：滑動螢幕時產生白光軌跡
+    // 手機端滑動觸控產生白光軌跡
     document.addEventListener('touchmove', function(e) {
       if (e.touches.length > 0) {
         const touch = e.touches[0];
