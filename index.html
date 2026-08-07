@@ -19,9 +19,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
   
   <style>
-    /* 預設鼠標樣式，會透過 JavaScript 動態切換圖檔 */
+    /* 設定預設自訂鼠標（精確指定 16 16 中心熱點） */
     body, a, button, input, select, textarea {
-      cursor: url('cursor-right.png') 16 16, auto !important;
+      cursor: url('cursor-right.png') 16 16, pointer !important;
     }
 
     body { font-family: 'Noto Sans TC', sans-serif; }
@@ -35,22 +35,25 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* 星星閃爍動態樣式 */
-    .star-trail {
+    /* 高級感白光點點軌跡樣式 */
+    .glow-dot {
       position: fixed;
       pointer-events: none;
       z-index: 9999;
-      animation: starFade 0.8s ease-out forwards;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 40%, rgba(255,255,255,0) 100%);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 20px rgba(245, 158, 11, 0.4);
+      animation: dotFade 0.6s ease-out forwards;
       user-select: none;
     }
-    @keyframes starFade {
+    @keyframes dotFade {
       0% {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
+        transform: translate(-50%, -50%) scale(1);
       }
       100% {
         opacity: 0;
-        transform: translate(-50%, -10px) scale(0.2) rotate(180deg);
+        transform: translate(-50%, -50%) scale(0.2);
       }
     }
   </style>
@@ -350,7 +353,7 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 互動特效與切換邏輯腳本 -->
+  <!-- 腳本區域：影片切換 + 電腦方向鼠標 + 手機觸控點點白光軌跡 -->
   <script>
     // 1. 三影片切換邏輯
     function switchVideo(videoSrc, mode, activeBtnId) {
@@ -360,8 +363,7 @@
       const allBtns = ['btn-video1', 'btn-video2', 'btn-video3'];
 
       allBtns.forEach(btnId => {
-        const btn = document.getElementById(btnId);
-        btn.className = "px-5 py-2.5 rounded-full text-sm font-bold bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-500/50 transition";
+        document.getElementById(btnId).className = "px-5 py-2.5 rounded-full text-sm font-bold bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-500/50 transition";
       });
 
       document.getElementById(activeBtnId).className = "px-5 py-2.5 rounded-full text-sm font-bold bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 transition";
@@ -377,50 +379,61 @@
       videoPlayer.play();
     }
 
-    // 2. 動態滑鼠鼠標切換（左移/右移/上下滑動）與星星軌跡
+    // 2. 高級感「點點白光」粒子生成器 (支援電腦 mousemove 與手機 touchmove)
     let lastX = window.innerWidth / 2;
     let lastY = window.innerHeight / 2;
     let lastTime = 0;
-    const starIcons = ['✨', '⭐', '💫', '✦', '✧'];
-    const starColors = ['#f59e0b', '#fbbf24', '#fef08a', '#ffffff'];
 
+    function createGlowDot(x, y) {
+      const now = Date.now();
+      if (now - lastTime > 30) { // 控制光點產生密度
+        lastTime = now;
+        const dot = document.createElement('div');
+        dot.className = 'glow-dot';
+        
+        // 隨機光點大小 (8px ~ 16px)
+        const size = Math.random() * 8 + 8;
+        dot.style.width = size + 'px';
+        dot.style.height = size + 'px';
+        
+        // 座標微調
+        dot.style.left = x + 'px';
+        dot.style.top = y + 'px';
+
+        document.body.appendChild(dot);
+        setTimeout(() => { dot.remove(); }, 600);
+      }
+    }
+
+    // 電腦端事件：更新鼠標圖樣與產生白光
     document.addEventListener('mousemove', function(e) {
       const currentX = e.clientX;
       const currentY = e.clientY;
       const deltaX = currentX - lastX;
       const deltaY = currentY - lastY;
 
-      // 判斷移動方向來更換鼠標圖案
+      // 判斷移動方向切換電腦鼠標圖案
       if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 5) {
-        // 上下滑動用圖3 (正面圖)
-        document.body.style.cursor = "url('cursor-vertical.png') 16 16, auto";
+        document.body.style.cursor = "url('cursor-vertical.png') 16 16, pointer";
       } else if (deltaX < -2) {
-        // 往左移用圖1 (左向圖)
-        document.body.style.cursor = "url('cursor-left.png') 16 16, auto";
+        document.body.style.cursor = "url('cursor-left.png') 16 16, pointer";
       } else if (deltaX > 2) {
-        // 往右移用圖2 (右向圖)
-        document.body.style.cursor = "url('cursor-right.png') 16 16, auto";
+        document.body.style.cursor = "url('cursor-right.png') 16 16, pointer";
       }
 
       lastX = currentX;
       lastY = currentY;
 
-      // 星星軌跡粒子特效
-      const now = Date.now();
-      if (now - lastTime > 40) {
-        lastTime = now;
-        const star = document.createElement('span');
-        star.className = 'star-trail';
-        star.innerText = starIcons[Math.floor(Math.random() * starIcons.length)];
-        star.style.color = starColors[Math.floor(Math.random() * starColors.length)];
-        star.style.left = currentX + (Math.random() * 12 - 6) + 'px';
-        star.style.top = currentY + (Math.random() * 12 - 6) + 'px';
-        star.style.fontSize = (Math.random() * 12 + 10) + 'px';
-
-        document.body.appendChild(star);
-        setTimeout(() => { star.remove(); }, 800);
-      }
+      createGlowDot(currentX, currentY);
     });
+
+    // 手機端事件：滑動螢幕時產生白光軌跡
+    document.addEventListener('touchmove', function(e) {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        createGlowDot(touch.clientX, touch.clientY);
+      }
+    }, { passive: true });
 
     // 3. 表單送出事件
     document.getElementById('contactForm').addEventListener('submit', function(e) {
