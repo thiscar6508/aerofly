@@ -43,6 +43,7 @@
       </a>
 
       <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#video-section" class="hover:text-amber-400 transition">實景影片</a>
         <a href="#features" class="hover:text-amber-400 transition">核心亮點</a>
         <a href="#plans" class="hover:text-amber-400 transition">飛行體驗</a>
         <a href="#school" class="hover:text-amber-400 transition">飛行駕訓班</a>
@@ -78,20 +79,32 @@
     </div>
   </section>
 
-  <!-- 精彩實景影片展示區 (影音實景) -->
-  <section class="py-16 bg-slate-950 border-b border-slate-800/80 px-6">
-    <div class="max-w-5xl mx-auto text-center">
+  <!-- 精彩實景雙影片展示區 (可切換影片) -->
+  <section id="video-section" class="py-16 bg-slate-950 border-b border-slate-800/80 px-6">
+    <div class="max-w-4xl mx-auto text-center">
       <span class="text-amber-400 text-xs font-bold tracking-widest uppercase mb-2 block">First-Person View</span>
-      <h2 class="text-2xl md:text-3xl font-bold text-white mb-8">第一人稱俯瞰 · 視角震撼呈現</h2>
+      <h2 class="text-2xl md:text-3xl font-bold text-white mb-6">第一人稱視角 · 震撼實景呈現</h2>
       
-      <div class="relative w-full max-w-4xl mx-auto rounded-3xl overflow-hidden border border-slate-800 shadow-2xl shadow-amber-500/5 bg-slate-900 aspect-video">
-        <!-- 嵌入拍攝影片（自動播放、靜音、循環） -->
-        <video class="w-full h-full object-cover" autoplay loop muted playsinline controls>
-          <source src="flight-video.mp4" type="video/mp4">
+      <!-- 影片切換按鈕 -->
+      <div class="flex justify-center gap-3 mb-8">
+        <button id="btn-video1" onclick="switchVideo('flight-video.mp4', 'btn-video1', 'btn-video2')" 
+                class="px-5 py-2.5 rounded-full text-sm font-bold bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 transition">
+          ✈ 高空俯瞰視野
+        </button>
+        <button id="btn-video2" onclick="switchVideo('takeoff-video.mp4', 'btn-video2', 'btn-video1')" 
+                class="px-5 py-2.5 rounded-full text-sm font-bold bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-500/50 transition">
+          🛫 跑道起飛瞬間
+        </button>
+      </div>
+
+      <!-- 影片播放器容器（改成不裁切全畫面呈現） -->
+      <div class="relative w-full max-w-sm md:max-w-md mx-auto rounded-3xl overflow-hidden border border-slate-800 shadow-2xl shadow-amber-500/10 bg-black aspect-[9/16]">
+        <video id="mainVideo" class="w-full h-full object-contain" autoplay loop muted playsinline controls>
+          <source id="videoSource" src="flight-video.mp4" type="video/mp4">
           您的瀏覽器不支援影片播放。
         </video>
       </div>
-      <p class="text-xs text-slate-500 mt-4">實景拍攝：鳥瞰屏東山谷河川飛行畫面</p>
+      <p class="text-xs text-slate-500 mt-4">屏東皆豪飛行場實景拍攝｜點選上方按鈕切換不同視角影片</p>
     </div>
   </section>
 
@@ -390,8 +403,26 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 表單送出邏輯腳本 -->
+  <!-- 影片切換與表單送出邏輯腳本 -->
   <script>
+    // 雙影片切換邏輯
+    function switchVideo(videoSrc, activeBtnId, inactiveBtnId) {
+      const videoPlayer = document.getElementById('mainVideo');
+      const videoSource = document.getElementById('videoSource');
+      const activeBtn = document.getElementById(activeBtnId);
+      const inactiveBtn = document.getElementById(inactiveBtnId);
+
+      // 更換影片來源並播放
+      videoSource.src = videoSrc;
+      videoPlayer.load();
+      videoPlayer.play();
+
+      // 按鈕樣式切換
+      activeBtn.className = "px-5 py-2.5 rounded-full text-sm font-bold bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 transition";
+      inactiveBtn.className = "px-5 py-2.5 rounded-full text-sm font-bold bg-slate-900 text-slate-300 border border-slate-800 hover:border-amber-500/50 transition";
+    }
+
+    // 表單送出事件
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       document.getElementById('contactForm').reset();
