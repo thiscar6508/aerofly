@@ -19,9 +19,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
   
   <style>
-    /* 設定預設自訂鼠標 */
-    body, a, button, input, select, textarea {
-      cursor: url('cursor-right.png') 16 16, pointer !important;
+    /* 事先定義三種方向的 CSS 鼠標樣式（最穩定做法） */
+    body, body * {
+      cursor: url('cursor-right.png') 16 16, auto !important;
+    }
+    body.cursor-dir-left, body.cursor-dir-left * {
+      cursor: url('cursor-left.png') 16 16, auto !important;
+    }
+    body.cursor-dir-right, body.cursor-dir-right * {
+      cursor: url('cursor-right.png') 16 16, auto !important;
+    }
+    body.cursor-dir-vert, body.cursor-dir-vert * {
+      cursor: url('cursor-vertical.png') 16 16, auto !important;
     }
 
     body { font-family: 'Noto Sans TC', sans-serif; }
@@ -153,7 +162,7 @@
         <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/40 transition">
           <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">⚡</div>
           <h3 class="text-xl font-bold text-white mb-3">澎湃動力輸出</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">搭載專業級 <strong class="text-slate-200">Rotax 912 系列四汽缸航空引擎</strong>，提供高達 <strong class="text-amber-400">100 匹馬力</strong>與極致推重比。滿載狀態下仍能以 <strong class="text-slate-200">1,180 FPM</strong> 驚人爬升率直衝雲霄。</p>
+          <p class="text-slate-400 text-sm leading-relaxed">搭載專業級 <strong class="text-slate-200">Rotax 912 系列四汽缸航空引擎</strong>，提供高達 <strong class="text-amber-400">100 匹馬力</strong>與極致推重比，輕鬆實現穩定快速爬升。</p>
         </div>
         <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/40 transition">
           <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">🖥️</div>
@@ -216,7 +225,7 @@
     </div>
   </section>
 
-  <!-- 飛天航太 初階啟航訓練課程 (飛行駕訓班完整專區) -->
+  <!-- 飛天航太 初階啟航訓練課程 (飛行駕訓班) -->
   <section id="school" class="py-24 bg-slate-900/60 border-y border-slate-800 px-6">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
@@ -237,7 +246,6 @@
           </a>
         </div>
 
-        <!-- 課程核心內容 -->
         <div class="grid md:grid-cols-2 gap-6 mb-10">
           <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex items-center gap-5">
             <div class="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl shrink-0">📖</div>
@@ -247,7 +255,6 @@
               <p class="text-slate-400 text-xs mt-1">氣象學、航空法規、氣流與飛行原理全解析</p>
             </div>
           </div>
-
           <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex items-center gap-5">
             <div class="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center text-3xl shrink-0">🛩️</div>
             <div>
@@ -258,7 +265,6 @@
           </div>
         </div>
 
-        <!-- 彈性選購與優惠 -->
         <div class="grid md:grid-cols-3 gap-6 text-sm">
           <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800">
             <p class="text-amber-400 font-bold mb-1">💡 彈性選購時數</p>
@@ -309,7 +315,7 @@
     </div>
   </section>
 
-  <!-- 教練資歷宣傳區 (完整資歷專區) -->
+  <!-- 教練資歷宣傳區 -->
   <section id="instructor" class="py-24 bg-slate-900/40 border-y border-slate-800 px-6">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-16">
@@ -318,7 +324,6 @@
       </div>
 
       <div class="bg-slate-950 border border-slate-800 rounded-3xl p-8 md:p-12">
-        <!-- 數據大牌 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 text-center border-b border-slate-800 pb-8">
           <div>
             <p class="text-3xl md:text-4xl font-black text-amber-400">5,151+</p>
@@ -338,7 +343,6 @@
           </div>
         </div>
 
-        <!-- 履歷清單 -->
         <div class="grid md:grid-cols-2 gap-8 text-sm">
           <div>
             <h4 class="text-base font-bold text-amber-400 mb-4 flex items-center gap-2">🎖️ 歷任重要職務</h4>
@@ -409,13 +413,8 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 腳本區域：預載鼠標圖片 + 影片切換 + 動態鼠標與軌跡 -->
+  <!-- 腳本區域：切換 CSS Class 鼠標方向 + 影片切換 + 白光軌跡 -->
   <script>
-    // 預載圖片以防瀏覽器延遲
-    const preloadLeft = new Image(); preloadLeft.src = 'cursor-left.png';
-    const preloadRight = new Image(); preloadRight.src = 'cursor-right.png';
-    const preloadVert = new Image(); preloadVert.src = 'cursor-vertical.png';
-
     // 1. 三影片切換邏輯
     function switchVideo(videoSrc, mode, activeBtnId) {
       const videoPlayer = document.getElementById('mainVideo');
@@ -462,23 +461,20 @@
       }
     }
 
-    // 電腦端 mousemove 切換游標與軌跡
+    // 3. 電腦端：切換 body 的 CSS Class 來完美更換鼠標圖案
     document.addEventListener('mousemove', function(e) {
       const currentX = e.clientX;
       const currentY = e.clientY;
       const deltaX = currentX - lastX;
       const deltaY = currentY - lastY;
 
-      // 當方向變化時設定 cursor 屬性
-      if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 4) {
-        document.documentElement.style.cursor = "url('cursor-vertical.png') 16 16, auto";
-        document.body.style.cursor = "url('cursor-vertical.png') 16 16, auto";
+      // 當上下移動劇烈時換正向 Class，左右移動時換左右 Class
+      if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 3) {
+        document.body.className = "bg-slate-950 text-slate-100 antialiased selection:bg-amber-500 selection:text-black cursor-dir-vert";
       } else if (deltaX < -2) {
-        document.documentElement.style.cursor = "url('cursor-left.png') 16 16, auto";
-        document.body.style.cursor = "url('cursor-left.png') 16 16, auto";
+        document.body.className = "bg-slate-950 text-slate-100 antialiased selection:bg-amber-500 selection:text-black cursor-dir-left";
       } else if (deltaX > 2) {
-        document.documentElement.style.cursor = "url('cursor-right.png') 16 16, auto";
-        document.body.style.cursor = "url('cursor-right.png') 16 16, auto";
+        document.body.className = "bg-slate-950 text-slate-100 antialiased selection:bg-amber-500 selection:text-black cursor-dir-right";
       }
 
       lastX = currentX;
@@ -495,7 +491,7 @@
       }
     }, { passive: true });
 
-    // 3. 表單送出事件
+    // 4. 表單送出事件
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       document.getElementById('contactForm').reset();
