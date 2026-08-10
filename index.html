@@ -432,7 +432,7 @@
               <input type="checkbox" name="bookingItem" value="體驗飛行（15分鐘 / 三地門方向）" checked class="w-4 h-4 rounded accent-amber-500">
               <div class="text-sm">
                 <p class="font-bold text-white">體驗飛行（15 分鐘）</p>
-                <p class="text-xs text-amber-400">航向：三地門方向（含 10 分鐘地面解說）</p>
+                <p class="text-xs text-amber-400">航向：三地門方向（初次飛進風中）</p>
               </div>
             </label>
 
@@ -448,15 +448,15 @@
               <input type="checkbox" name="bookingItem" value="初階啟航訓練課程（飛行駕訓班）" class="w-4 h-4 rounded accent-amber-500">
               <div class="text-sm">
                 <p class="font-bold text-white">初階啟航訓練課程（飛行駕訓班）</p>
-                <p class="text-xs text-slate-400">學科 20h + 術科 15h 完整考照班</p>
+                <p class="text-xs text-slate-400">學科 20h + 術科 15h 考照班</p>
               </div>
             </label>
 
             <label class="flex items-center gap-3.5 p-3.5 bg-slate-900 border border-slate-800 rounded-xl hover:border-amber-500/50 has-[:checked]:border-amber-500 has-[:checked]:bg-amber-500/10 transition cursor-pointer">
-              <input type="checkbox" name="bookingItem" value="動力三角翼 QA 與考照諮詢" class="w-4 h-4 rounded accent-amber-500">
+              <input type="checkbox" name="bookingItem" value="動力三角翼 QA 與諮詢" class="w-4 h-4 rounded accent-amber-500">
               <div class="text-sm">
-                <p class="font-bold text-white">動力三角翼 QA 與考照諮詢</p>
-                <p class="text-xs text-slate-400">購機專案與合法考照疑問專人解答</p>
+                <p class="font-bold text-white">動力三角翼 QA 與諮詢</p>
+                <p class="text-xs text-slate-400">想開飛機還是買飛機？各種疑問專人解答</p>
               </div>
             </label>
 
@@ -580,11 +580,33 @@
     }, { passive: true });
 
     // 5. 表單送出事件
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      document.getElementById('contactForm').reset();
-      document.getElementById('successMsg').classList.remove('hidden');
-    });
+    // 表單送出事件：自動跳轉至 LINE@ 並帶入填寫內容
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // 1. 抓取客人填寫的資料
+  const name = document.querySelector('input[placeholder="例如：王大明"]').value;
+  const phone = document.querySelector('input[placeholder="0912-345-678"]').value;
+  const note = document.querySelector('textarea').value;
+  
+  // 抓取所有勾選的預約項目
+  const checkedItems = Array.from(document.querySelectorAll('input[name="bookingItem"]:checked'))
+                           .map(cb => cb.value)
+                           .join('、');
+  
+  // 2. 組成 LINE 訊息內文
+  const message = `你好，我想預約飛天航太飛行體驗：\n` +
+                  `👤 姓名：${name}\n` +
+                  `📞 電話：${phone}\n` +
+                  `✈ 預約項目：${checkedItems}\n` +
+                  `💬 備註：${note || '無'}`;
+
+  // 3. 您的 LINE@ 連結 (請替換為您公司實際的 LINE@ 網址或 ID)
+  const lineUrl = `https://line.me/R/oaMessage/@241brges/?${encodeURIComponent(message)}`;
+
+  // 4. 打開 LINE
+  window.open(lineUrl, '_blank');
+});
   </script>
 </body>
 </html>
