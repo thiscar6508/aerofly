@@ -579,34 +579,46 @@
       }
     }, { passive: true });
 
-    // 5. 表單送出事件
-    // 表單送出事件：自動跳轉至 LINE@ 並帶入填寫內容
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  // 1. 抓取客人填寫的資料
-  const name = document.querySelector('input[placeholder="例如：王大明"]').value;
-  const phone = document.querySelector('input[placeholder="0912-345-678"]').value;
-  const note = document.querySelector('textarea').value;
-  
-  // 抓取所有勾選的預約項目
-  const checkedItems = Array.from(document.querySelectorAll('input[name="bookingItem"]:checked'))
-                           .map(cb => cb.value)
-                           .join('、');
-  
-  // 2. 組成 LINE 訊息內文
-  const message = `你好，我想預約飛天航太飛行體驗：\n` +
-                  `👤 姓名：${name}\n` +
-                  `📞 電話：${phone}\n` +
-                  `✈ 預約項目：${checkedItems}\n` +
-                  `💬 備註：${note || '無'}`;
+    // 5. 表單送出事件：手機發送至 LINE，電腦發送至 Email
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // 1. 抓取客人填寫的資料
+      const name = document.querySelector('input[placeholder="例如：王大明"]').value;
+      const phone = document.querySelector('input[placeholder="0912-345-678"]').value;
+      const note = document.querySelector('textarea').value;
+      
+      // 抓取所有勾選的預約項目
+      const checkedItems = Array.from(document.querySelectorAll('input[name="bookingItem"]:checked'))
+                               .map(cb => cb.value)
+                               .join('、');
+      
+      // 2. 組成預約訊息內文
+      const subject = `【飛天航太】預約通知 - ${name} 先生/小姐`;
+      const message = `你好，我想預約飛天航太的飛行項目：\n\n` +
+                      `👤 姓名：${name}\n` +
+                      `📞 電話：${phone}\n` +
+                      `✈ 預約項目：${checkedItems || '未勾選'}\n` +
+                      `💬 備註：${note || '無'}`;
 
-  // 3. 您的 LINE@ 連結 (請替換為您公司實際的 LINE@ 網址或 ID)
-  const lineUrl = `https://line.me/R/oaMessage/@241brges/?${encodeURIComponent(message)}`;
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  // 4. 打開 LINE
-  window.open(lineUrl, '_blank');
-});
+      if (isMobile) {
+        // 手機端：直接喚醒 LINE App 並帶入文字
+        const lineId = "@241brges";
+        const mobileLineUrl = `https://line.me/R/oaMessage/${lineId}/?${encodeURIComponent(message)}`;
+        window.location.href = mobileLineUrl;
+      } else {
+        // 電腦端：呼叫預設 Email 軟體寄送信件至 thiscar8533@gmail.com
+        const targetEmail = "thiscar8533@gmail.com";
+        const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        window.location.href = mailtoUrl;
+      }
+
+      // 提示成功與重設表單
+      document.getElementById('contactForm').reset();
+      document.getElementById('successMsg').classList.remove('hidden');
+    });
   </script>
 </body>
 </html>
