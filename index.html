@@ -114,6 +114,7 @@
         <a href="#features" class="hover:text-amber-400 transition">核心亮點</a>
         <a href="#recommendations" class="hover:text-amber-400 transition">各界推薦</a>
         <a href="#bridal" class="hover:text-amber-400 transition">婚紗美拍</a>
+        <a href="#events" class="hover:text-amber-400 transition">活動回顧</a>
         <a href="#plans" class="hover:text-amber-400 transition">飛行體驗</a>
         <a href="#school" class="hover:text-amber-400 transition">飛行駕訓班</a>
         <a href="#certification" class="hover:text-amber-400 transition">認證與合規</a>
@@ -287,7 +288,7 @@
     </div>
   </section>
 
-  <!-- 3. 婚紗禮服美拍專區 (已調整為 1 張大圖展示) -->
+  <!-- 3. 婚紗禮服美拍專區 -->
   <section id="bridal" class="py-24 bg-slate-900/60 border-b border-slate-800/80 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
@@ -320,7 +321,7 @@
     </div>
   </section>
 
-  <!-- 展覽回顧區 -->
+  <!-- 展覽回顧區 (影片與照片比例對齊) -->
   <section id="events" class="py-24 bg-slate-950 border-b border-slate-800/80 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
@@ -330,7 +331,7 @@
       </div>
 
       <div class="space-y-16">
-        <!-- 活動 1：第16屆台北國際航太暨國防工業展 -->
+        <!-- 活動 1：第16屆台北國際航太暨國防工業展 (橫式 16:9 對齊) -->
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-2xl">
           <div class="mb-8 border-b border-slate-800 pb-6">
             <span class="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-md text-xs font-bold mb-3">重點展覽實錄</span>
@@ -340,19 +341,17 @@
             </p>
           </div>
 
-          <div class="grid lg:grid-cols-3 gap-6 items-center">
-            <div class="lg:col-span-2 grid sm:grid-cols-3 gap-4">
-              <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group">
-                <img src="taipei-defense-1.jpg" alt="台北航太展照片1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80'">
-              </div>
-              <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group">
-                <img src="taipei-defense-2.jpg" alt="台北航太展照片2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80'">
-              </div>
-              <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group">
-                <img src="taipei-defense-3.jpg" alt="台北航太展照片3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80'">
-              </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group">
+              <img src="taipei-defense-1.jpg" alt="台北航太展照片1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80'">
             </div>
-            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-black aspect-video relative">
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group">
+              <img src="taipei-defense-2.jpg" alt="台北航太展照片2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80'">
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group">
+              <img src="taipei-defense-3.jpg" alt="台北航太展照片3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80'">
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-black aspect-4/3 relative">
               <video class="w-full h-full object-cover" controls loop muted playsinline>
                 <source src="taipei-defense.mp4" type="video/mp4">
                 您的瀏覽器不支援影片播放。
@@ -361,7 +360,7 @@
           </div>
         </div>
 
-        <!-- 活動 2：竹北吊車大王啟德50周年機械展 -->
+        <!-- 活動 2：竹北吊車大王啟德50周年機械展 (直式 3:4 切齊對齊) -->
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-2xl">
           <div class="mb-8 border-b border-slate-800 pb-6">
             <span class="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-md text-xs font-bold mb-3">大型展覽亮點</span>
@@ -371,19 +370,18 @@
             </p>
           </div>
 
-          <div class="grid lg:grid-cols-3 gap-6 items-center">
-            <div class="lg:col-span-2 grid sm:grid-cols-3 gap-4">
-              <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group">
-                <img src="chide-1.jpg" alt="啟德50周年機械展照片1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80'">
-              </div>
-              <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group">
-                <img src="chide-2.jpg" alt="啟德50周年機械展照片2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80'">
-              </div>
-              <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group">
-                <img src="chide-3.jpg" alt="啟德50周年機械展照片3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=600&q=80'">
-              </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-center">
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-[3/4] group">
+              <img src="chide-1.jpg" alt="啟德50周年機械展照片1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80'">
             </div>
-            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-black aspect-video relative">
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-[3/4] group">
+              <img src="chide-2.jpg" alt="啟德50周年機械展照片2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80'">
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-[3/4] group">
+              <img src="chide-3.jpg" alt="啟德50周年機械展照片3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=600&q=80'">
+            </div>
+            <!-- 影片外框改為 aspect-[3/4] 直式與左邊照片完全切齊 -->
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-black aspect-[3/4] relative">
               <video class="w-full h-full object-cover" controls loop muted playsinline>
                 <source src="chide.mp4" type="video/mp4">
                 您的瀏覽器不支援影片播放。
@@ -648,7 +646,7 @@
               <input type="checkbox" name="bookingItem" value="動力三角翼 QA 與諮詢" class="w-4 h-4 rounded accent-amber-500">
               <div class="text-sm">
                 <p class="font-bold text-white">動力三角翼 QA 與諮詢</p>
-                <p class="text-xs text-slate-400">想開飛機還是買飛機？福委會聯繫窗口？各種疑問專人解答</p>
+                <p class="text-xs text-slate-400">想開飛機還是買飛機？各種疑問專人解答</p>
               </div>
             </label>
 
