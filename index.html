@@ -46,7 +46,7 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* ✈️ 核心動效：放大 1.2 倍（總共 5800px），一進頁面瞬間滿開極速劃過 */
+    /* ✈️ 核心動效：電腦版 1.5 秒極速，手機版自動放慢至 3.2 秒 */
     .fly-over-trike {
       position: absolute;
       width: 5800px;
@@ -56,6 +56,30 @@
       pointer-events: none;
       filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.95));
       animation: trikeInstantFly 1.5s linear forwards;
+    }
+
+    /* 🌟 動態閃亮尾巴粒子特效 */
+    .sparkle-tail {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(circle, #fff 0%, #f59e0b 60%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 15px #f59e0b, 0 0 25px #ffffff;
+      z-index: 15;
+      pointer-events: none;
+      animation: tailFade 0.8s ease-out forwards;
+    }
+
+    @keyframes tailFade {
+      0% {
+        opacity: 1;
+        transform: scale(1.5) translate(0, 0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.2) translate(-30px, 30px);
+      }
     }
 
     @keyframes trikeInstantFly {
@@ -73,7 +97,32 @@
       }
     }
 
-    /* 📝 標題梯次淡入動畫 */
+    /* 📱 針對手機版（螢幕寬度小於 768px）自動將飛行與文字浮現速度調慢 */
+    @media (max-width: 768px) {
+      .fly-over-trike {
+        animation: trikeInstantFlyMobile 3.2s cubic-bezier(0.1, 0.7, 0.1, 1) forwards !important;
+      }
+      .fade-step-1 { animation: stepFadeIn 1s ease-out 1.2s forwards !important; }
+      .fade-step-2 { animation: stepFadeIn 1s ease-out 2.0s forwards !important; }
+      .fade-step-3 { animation: stepFadeIn 1s ease-out 2.8s forwards !important; }
+    }
+
+    @keyframes trikeInstantFlyMobile {
+      0% {
+        opacity: 1;
+        transform: translate(-120%, 120vh) rotate(-20deg);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-10%, -10%) rotate(-10deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(140vw, -140vh) rotate(-2deg);
+      }
+    }
+
+    /* 📝 標題梯次淡入動畫 (電腦版預設節奏) */
     .fade-step-1 {
       opacity: 0;
       animation: stepFadeIn 0.8s ease-out 0.4s forwards;
@@ -182,15 +231,15 @@
     </div>
   </header>
 
-  <!-- 2. Hero 主視覺區 (一進頁面瞬間極速飛過) -->
-  <section class="hero-bg min-h-screen pt-28 pb-20 flex items-center justify-center relative overflow-hidden px-6">
+  <!-- 2. Hero 主視覺區 (內建閃亮尾巴特效引擎) -->
+  <section id="heroSection" class="hero-bg min-h-screen pt-28 pb-20 flex items-center justify-center relative overflow-hidden px-6">
     
-    <!-- 巨型去背動力三角翼 (一進頁面立即極速飛過) -->
-    <img src="video.png" alt="巨型動力三角翼" class="fly-over-trike">
+    <!-- 巨型去背動力三角翼 -->
+    <img id="flyingTrike" src="video.png" alt="巨型動力三角翼" class="fly-over-trike">
 
     <div class="max-w-4xl mx-auto text-center relative z-10 space-y-6">
       
-      <!-- 標題第 1 階段：Apsaras 與「劃破天際」 -->
+      <!-- 標題第 1 階段 -->
       <div class="fade-step-1 space-y-4">
         <span class="inline-block px-4 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs tracking-widest font-semibold uppercase shadow-lg shadow-amber-500/10">
           Apsaras Aerospace Technology
@@ -201,12 +250,12 @@
         </h1>
       </div>
 
-      <!-- 標題第 2 階段：定義你的自由高度 -->
+      <!-- 標題第 2 階段 -->
       <div class="text-5xl md:text-7xl font-black leading-tight drop-shadow-lg fade-step-2">
         <span class="gold-gradient">定義你的自由高度</span>
       </div>
       
-      <!-- 第 3 階段：敘述與預約按鈕 -->
+      <!-- 第 3 階段 -->
       <div class="fade-step-3 space-y-8 pt-2">
         <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
           國家級頂尖教練親自帶飛 × 美國原裝驗證動力三角翼。<br class="hidden sm:inline">頭手可自由伸出機外，盡情拍照攝影，輕鬆享受絕美天空之旅！
@@ -741,7 +790,7 @@
               <input type="checkbox" name="bookingItem" value="初階啟航訓練課程（飛行駕訓班）" class="w-4 h-4 rounded accent-amber-500">
               <div class="text-sm">
                 <p class="font-bold text-white">初階啟航訓練課程（飛行駕訓班）</p>
-                <p class="text-xs text-slate-400">學科 20h + 術科 15h 考照班</p>
+                <p class="text-xs text-amber-400">學科 20h + 術科 15h 考照班</p>
               </div>
             </label>
 
@@ -749,7 +798,7 @@
               <input type="checkbox" name="bookingItem" value="動力三角翼 QA 與諮詢" class="w-4 h-4 rounded accent-amber-500">
               <div class="text-sm">
                 <p class="font-bold text-white">動力三角翼 QA 與諮詢</p>
-                <p class="text-xs text-slate-400">想開飛機還是買飛機？各種疑問專人解答</p>
+                <p class="text-xs text-amber-400">想開飛機還是買飛機？各種疑問專人解答</p>
               </div>
             </label>
 
@@ -776,12 +825,39 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 腳本區域：切換 CSS Class 鼠標方向 + 影片切換 + 白光軌跡 + 手機觸控浮現大圖案 -->
+  <!-- 腳本區域：閃亮尾巴動態生成器 + 滑鼠軌跡 + 表單送出 -->
   <script>
     // 預載圖片以防瀏覽器延遲
     const preloadLeft = new Image(); preloadLeft.src = 'cursor-left.png';
     const preloadRight = new Image(); preloadRight.src = 'cursor-right.png';
     const preloadVert = new Image(); preloadVert.src = 'cursor-vertical.png';
+
+    // 🌟 動態生成飛行閃亮尾巴的特效引擎
+    const trikeImg = document.getElementById('flyingTrike');
+    const heroSec = document.getElementById('heroSection');
+
+    if (trikeImg && heroSec) {
+      setInterval(() => {
+        const rect = trikeImg.getBoundingClientRect();
+        const heroRect = heroSec.getBoundingClientRect();
+
+        // 只有當飛行機身在 Hero 畫面內時才產生尾巴粒子
+        if (rect.top < heroRect.bottom && rect.bottom > heroRect.top && rect.left < heroRect.right && rect.right > heroRect.left) {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle-tail';
+          
+          // 計算機身尾部約略位置（機身左下方偏後）
+          const tailX = rect.left + rect.width * 0.2 + (Math.random() * 30 - 15);
+          const tailY = rect.top + rect.height * 0.7 + (Math.random() * 30 - 15);
+
+          sparkle.style.left = tailX + 'px';
+          sparkle.style.top = tailY + 'px';
+
+          document.body.appendChild(sparkle);
+          setTimeout(() => { sparkle.remove(); }, 800);
+        }
+      }, 50); // 每 50ms 生成一個閃亮粒子
+    }
 
     // 1. 三影片切換邏輯
     function switchVideo(videoSrc, mode, activeBtnId) {
