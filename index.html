@@ -58,27 +58,27 @@
       animation: trikeInstantFly 1.5s linear forwards;
     }
 
-    /* 🌟 動態閃亮尾巴粒子特效 */
-    .sparkle-tail {
+    /* 🌟 超級盛大、華麗且燦爛的尾焰特效粒子 */
+    .grand-sparkle-tail {
       position: absolute;
-      width: 12px;
-      height: 12px;
-      background: radial-gradient(circle, #fff 0%, #f59e0b 60%, transparent 100%);
       border-radius: 50%;
-      box-shadow: 0 0 15px #f59e0b, 0 0 25px #ffffff;
-      z-index: 15;
       pointer-events: none;
-      animation: tailFade 0.8s ease-out forwards;
+      z-index: 15;
+      animation: grandTailFade 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
     }
 
-    @keyframes tailFade {
+    @keyframes grandTailFade {
       0% {
         opacity: 1;
-        transform: scale(1.5) translate(0, 0);
+        transform: scale(0.4) translate(0, 0);
+      }
+      30% {
+        opacity: 1;
+        transform: scale(2.2) translate(-20px, 20px);
       }
       100% {
         opacity: 0;
-        transform: scale(0.2) translate(-30px, 30px);
+        transform: scale(0.1) translate(-70px, 70px);
       }
     }
 
@@ -97,7 +97,7 @@
       }
     }
 
-    /* 📱 針對手機版（螢幕寬度小於 768px）自動將飛行與文字浮現速度調慢 */
+    /* 📱 針對手機版自動調慢速度 */
     @media (max-width: 768px) {
       .fly-over-trike {
         animation: trikeInstantFlyMobile 3.2s cubic-bezier(0.1, 0.7, 0.1, 1) forwards !important;
@@ -122,7 +122,7 @@
       }
     }
 
-    /* 📝 標題梯次淡入動畫 (電腦版預設節奏) */
+    /* 📝 標題梯次淡入動畫 */
     .fade-step-1 {
       opacity: 0;
       animation: stepFadeIn 0.8s ease-out 0.4s forwards;
@@ -231,7 +231,7 @@
     </div>
   </header>
 
-  <!-- 2. Hero 主視覺區 (內建閃亮尾巴特效引擎) -->
+  <!-- 2. Hero 主視覺區 (內建超盛大華麗光尾引擎) -->
   <section id="heroSection" class="hero-bg min-h-screen pt-28 pb-20 flex items-center justify-center relative overflow-hidden px-6">
     
     <!-- 巨型去背動力三角翼 -->
@@ -790,7 +790,7 @@
               <input type="checkbox" name="bookingItem" value="初階啟航訓練課程（飛行駕訓班）" class="w-4 h-4 rounded accent-amber-500">
               <div class="text-sm">
                 <p class="font-bold text-white">初階啟航訓練課程（飛行駕訓班）</p>
-                <p class="text-xs text-amber-400">學科 20h + 術科 15h 考照班</p>
+                <p class="text-xs text-slate-400">學科 20h + 術科 15h 考照班</p>
               </div>
             </label>
 
@@ -825,14 +825,14 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 腳本區域：閃亮尾巴動態生成器 + 滑鼠軌跡 + 表單送出 -->
+  <!-- 腳本區域：盛大光尾特效引擎 + 三影片切換 + 鼠標方向 + 表單送出 -->
   <script>
     // 預載圖片以防瀏覽器延遲
     const preloadLeft = new Image(); preloadLeft.src = 'cursor-left.png';
     const preloadRight = new Image(); preloadRight.src = 'cursor-right.png';
     const preloadVert = new Image(); preloadVert.src = 'cursor-vertical.png';
 
-    // 🌟 動態生成飛行閃亮尾巴的特效引擎
+    // 🌟 超盛大華麗光尾特效引擎
     const trikeImg = document.getElementById('flyingTrike');
     const heroSec = document.getElementById('heroSection');
 
@@ -841,22 +841,39 @@
         const rect = trikeImg.getBoundingClientRect();
         const heroRect = heroSec.getBoundingClientRect();
 
-        // 只有當飛行機身在 Hero 畫面內時才產生尾巴粒子
+        // 當機身飛過 Hero 畫面範圍時噴發盛大光尾
         if (rect.top < heroRect.bottom && rect.bottom > heroRect.top && rect.left < heroRect.right && rect.right > heroRect.left) {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle-tail';
           
-          // 計算機身尾部約略位置（機身左下方偏後）
-          const tailX = rect.left + rect.width * 0.2 + (Math.random() * 30 - 15);
-          const tailY = rect.top + rect.height * 0.7 + (Math.random() * 30 - 15);
+          // 一次生成 3 到 5 個華麗粒子營造盛大感
+          for (let i = 0; i < 4; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'grand-sparkle-tail';
+            
+            const size = Math.random() * 16 + 10; // 粒子大小 10px ~ 26px
+            sparkle.style.width = size + 'px';
+            sparkle.style.height = size + 'px';
 
-          sparkle.style.left = tailX + 'px';
-          sparkle.style.top = tailY + 'px';
+            // 隨機顏色：金黃、亮橘、耀眼純白
+            const colors = [
+              'radial-gradient(circle, #fff 0%, #f59e0b 60%, transparent 100%)',
+              'radial-gradient(circle, #fde047 0%, #ea580c 70%, transparent 100%)',
+              'radial-gradient(circle, #ffffff 0%, #38bdf8 60%, transparent 100%)'
+            ];
+            sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            sparkle.style.boxShadow = '0 0 20px #f59e0b, 0 0 35px #ffffff';
 
-          document.body.appendChild(sparkle);
-          setTimeout(() => { sparkle.remove(); }, 800);
+            // 定位在機身尾翼附近
+            const tailX = rect.left + rect.width * 0.25 + (Math.random() * 60 - 30);
+            const tailY = rect.top + rect.height * 0.65 + (Math.random() * 60 - 30);
+
+            sparkle.style.left = tailX + 'px';
+            sparkle.style.top = tailY + 'px';
+
+            document.body.appendChild(sparkle);
+            setTimeout(() => { sparkle.remove(); }, 1200);
+          }
         }
-      }, 50); // 每 50ms 生成一個閃亮粒子
+      }, 30); // 頻率高達每 30ms 噴發一次
     }
 
     // 1. 三影片切換邏輯
