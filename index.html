@@ -34,13 +34,10 @@
     }
 
     body { font-family: 'Noto Sans TC', sans-serif; }
-    
-    /* Hero 主視覺背景圖檔指定為 video.jpg */
     .hero-bg {
-      background: linear-gradient(180deg, rgba(10, 15, 30, 0.7) 0%, rgba(5, 7, 15, 0.95) 100%), 
-                  url('video.jpg') center/cover no-repeat;
+      background: linear-gradient(180deg, rgba(10, 15, 30, 0.85) 0%, rgba(5, 7, 15, 0.98) 100%), 
+                  url('https://images.unsplash.com/photo-1508672019048-805479767793?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
     }
-
     .gold-gradient {
       background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
       -webkit-background-clip: text;
@@ -103,7 +100,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- 1. 頁首導覽列 -->
+  <!-- 1. 頁首導覽列 (已將「體驗方案」移至「活動展覽」與「飛行駕訓班」中間) -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800/80 shadow-2xl">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       
@@ -115,10 +112,10 @@
       <!-- 導覽選單 -->
       <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-sm font-semibold tracking-wide text-slate-300">
         <a href="#features" class="hover:text-amber-400 transition-colors py-1">核心與體驗</a>
-        <a href="#plans" class="hover:text-amber-400 transition-colors py-1">體驗方案</a>
         <a href="#recommendations" class="hover:text-amber-400 transition-colors py-1">各界推薦</a>
         <a href="#bridal" class="hover:text-amber-400 transition-colors py-1">禮服美拍</a>
         <a href="#events" class="hover:text-amber-400 transition-colors py-1">活動展覽</a>
+        <a href="#plans" class="hover:text-amber-400 transition-colors py-1">體驗方案</a>
         <a href="#school" class="hover:text-amber-400 transition-colors py-1">飛行駕訓班</a>
         <a href="#certification" class="hover:text-amber-400 transition-colors py-1">認證與教練</a>
       </nav>
@@ -129,7 +126,7 @@
     </div>
   </header>
 
-  <!-- Hero 主視覺區 (背景圖檔載入 video.jpg) -->
+  <!-- Hero 主視覺區 -->
   <section class="hero-bg min-h-screen pt-36 pb-20 flex items-center justify-center relative overflow-hidden px-6">
     <div class="max-w-4xl mx-auto text-center relative z-10">
       <span class="inline-block px-4 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs tracking-widest font-semibold uppercase mb-6">
@@ -225,7 +222,6 @@
         </div>
 
         <div class="grid lg:grid-cols-2 gap-8">
-          
           <!-- 科技與製造業巨頭 -->
           <div class="bg-gradient-to-b from-slate-900/90 to-slate-950 border border-slate-800 p-8 md:p-10 rounded-3xl shadow-2xl relative group hover:border-amber-500/40 transition-all duration-300">
             <div class="flex items-center justify-between mb-8 pb-6 border-b border-slate-800/80">
@@ -239,7 +235,6 @@
               <span class="text-xs bg-amber-500/10 text-amber-400 px-3 py-1 rounded-full font-bold border border-amber-500/20">高滿意度認證</span>
             </div>
 
-            <!-- 已修正福委會推薦感言內文 -->
             <div class="mb-6 bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4">
               <p class="text-xs text-amber-400/90 font-semibold mb-1">⭐ 勤誠興業 專屬合作</p>
               <p class="text-slate-300 text-xs leading-relaxed">「員工證超優惠！極致震撼的高空視野與極高安全標準，福委會實在太厲害了！」</p>
@@ -354,7 +349,7 @@
     </div>
   </section>
 
-  <!-- 展覽回顧區 -->
+  <!-- 展覽回顧區 (竹北吊車展在前，台北航太展在後) -->
   <section id="events" class="py-24 bg-slate-950 border-b border-slate-800/80 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
