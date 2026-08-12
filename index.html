@@ -46,40 +46,16 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* ✈️ 核心動效：電腦版 1.5 秒極速，手機版自動放慢至 3.2 秒 */
+    /* ✈️ 動力三角翼極速劃過 */
     .fly-over-trike {
       position: absolute;
-      width: 5800px;
-      max-width: 400vw;
+      width: 1400px; /* 適中俐落的實景比例尺寸 */
+      max-width: 110vw;
       height: auto;
       z-index: 20;
       pointer-events: none;
-      filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.95));
+      filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.9));
       animation: trikeInstantFly 1.5s linear forwards;
-    }
-
-    /* 🌟 超級盛大、華麗且燦爛的尾焰特效粒子 */
-    .grand-sparkle-tail {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 15;
-      animation: grandTailFade 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-    }
-
-    @keyframes grandTailFade {
-      0% {
-        opacity: 1;
-        transform: scale(0.4) translate(0, 0);
-      }
-      30% {
-        opacity: 1;
-        transform: scale(2.2) translate(-20px, 20px);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0.1) translate(-70px, 70px);
-      }
     }
 
     @keyframes trikeInstantFly {
@@ -97,7 +73,31 @@
       }
     }
 
-    /* 📱 針對手機版自動調慢速度 */
+    /* ✨ 飛過後灑落的純白與金粉星光點點 */
+    .falling-stardust {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 15;
+      animation: starFall 1.8s ease-out forwards;
+    }
+
+    @keyframes starFall {
+      0% {
+        opacity: 0;
+        transform: scale(0.2) translateY(-20px);
+      }
+      30% {
+        opacity: 1;
+        transform: scale(1.4) translateY(0);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.5) translateY(50px);
+      }
+    }
+
+    /* 📱 手機版自動調慢速度 */
     @media (max-width: 768px) {
       .fly-over-trike {
         animation: trikeInstantFlyMobile 3.2s cubic-bezier(0.1, 0.7, 0.1, 1) forwards !important;
@@ -231,7 +231,7 @@
     </div>
   </header>
 
-  <!-- 2. Hero 主視覺區 (內建超盛大華麗光尾引擎) -->
+  <!-- 2. Hero 主視覺區 (純白為主、金粉為輔的星光灑落特效) -->
   <section id="heroSection" class="hero-bg min-h-screen pt-28 pb-20 flex items-center justify-center relative overflow-hidden px-6">
     
     <!-- 巨型去背動力三角翼 -->
@@ -790,7 +790,7 @@
               <input type="checkbox" name="bookingItem" value="初階啟航訓練課程（飛行駕訓班）" class="w-4 h-4 rounded accent-amber-500">
               <div class="text-sm">
                 <p class="font-bold text-white">初階啟航訓練課程（飛行駕訓班）</p>
-                <p class="text-xs text-slate-400">學科 20h + 術科 15h 考照班</p>
+                <p class="text-xs text-amber-400">學科 20h + 術科 15h 考照班</p>
               </div>
             </label>
 
@@ -825,14 +825,14 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 腳本區域：盛大光尾特效引擎 + 三影片切換 + 鼠標方向 + 表單送出 -->
+  <!-- 腳本區域：純白為主金粉為輔的盛大星光灑落特效引擎 -->
   <script>
     // 預載圖片以防瀏覽器延遲
     const preloadLeft = new Image(); preloadLeft.src = 'cursor-left.png';
     const preloadRight = new Image(); preloadRight.src = 'cursor-right.png';
     const preloadVert = new Image(); preloadVert.src = 'cursor-vertical.png';
 
-    // 🌟 超盛大華麗光尾特效引擎
+    // ✨ 打造以「純白為主、金粉為輔」的星光灑落特效引擎
     const trikeImg = document.getElementById('flyingTrike');
     const heroSec = document.getElementById('heroSection');
 
@@ -841,39 +841,39 @@
         const rect = trikeImg.getBoundingClientRect();
         const heroRect = heroSec.getBoundingClientRect();
 
-        // 當機身飛過 Hero 畫面範圍時噴發盛大光尾
+        // 當機身在 Hero 畫面中時，沿著軌跡與四周不斷灑落星光
         if (rect.top < heroRect.bottom && rect.bottom > heroRect.top && rect.left < heroRect.right && rect.right > heroRect.left) {
           
-          // 一次生成 3 到 5 個華麗粒子營造盛大感
-          for (let i = 0; i < 4; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'grand-sparkle-tail';
+          for (let i = 0; i < 5; i++) {
+            const star = document.createElement('div');
+            star.className = 'falling-stardust';
             
-            const size = Math.random() * 16 + 10; // 粒子大小 10px ~ 26px
-            sparkle.style.width = size + 'px';
-            sparkle.style.height = size + 'px';
+            const size = Math.random() * 12 + 6; // 粒子大小 6px ~ 18px
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
 
-            // 隨機顏色：金黃、亮橘、耀眼純白
-            const colors = [
-              'radial-gradient(circle, #fff 0%, #f59e0b 60%, transparent 100%)',
-              'radial-gradient(circle, #fde047 0%, #ea580c 70%, transparent 100%)',
-              'radial-gradient(circle, #ffffff 0%, #38bdf8 60%, transparent 100%)'
-            ];
-            sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
-            sparkle.style.boxShadow = '0 0 20px #f59e0b, 0 0 35px #ffffff';
+            // 比例：85% 純白耀眼光芒、15% 奢華金粉
+            const isGold = Math.random() < 0.15;
+            if (isGold) {
+              star.style.background = 'radial-gradient(circle, #fde047 0%, #d97706 70%, transparent 100%)';
+              star.style.boxShadow = '0 0 15px #f59e0b, 0 0 25px #fbbf24';
+            } else {
+              star.style.background = 'radial-gradient(circle, #ffffff 0%, #38bdf8 60%, transparent 100%)';
+              star.style.boxShadow = '0 0 18px #ffffff, 0 0 30px #bae6fd';
+            }
 
-            // 定位在機身尾翼附近
-            const tailX = rect.left + rect.width * 0.25 + (Math.random() * 60 - 30);
-            const tailY = rect.top + rect.height * 0.65 + (Math.random() * 60 - 30);
+            // 隨機灑落在機身周圍與身後軌跡
+            const dropX = rect.left + rect.width * 0.3 + (Math.random() * 400 - 200);
+            const dropY = rect.top + rect.height * 0.5 + (Math.random() * 300 - 150);
 
-            sparkle.style.left = tailX + 'px';
-            sparkle.style.top = tailY + 'px';
+            star.style.left = dropX + 'px';
+            star.style.top = dropY + 'px';
 
-            document.body.appendChild(sparkle);
-            setTimeout(() => { sparkle.remove(); }, 1200);
+            document.body.appendChild(star);
+            setTimeout(() => { star.remove(); }, 1800);
           }
         }
-      }, 30); // 頻率高達每 30ms 噴發一次
+      }, 25);
     }
 
     // 1. 三影片切換邏輯
