@@ -100,28 +100,26 @@
 </head>
 <body class="bg-slate-950 text-slate-100 antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- 頁首導覽列 -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+  <!-- 1. 優化後的頁首導覽列 (清爽不擁擠，高級質感) -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800/80 shadow-2xl">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       
       <!-- LOGOTRA.png 圖檔 -->
-      <a href="#" class="flex items-center">
-        <img src="LOGOTRA.png" alt="飛天航太 LOGO" class="h-[60px] sm:h-[70px] w-auto object-contain">
+      <a href="#" class="flex items-center shrink-0">
+        <img src="LOGOTRA.png" alt="飛天航太 LOGO" class="h-12 sm:h-14 w-auto object-contain">
       </a>
 
-      <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#video-section" class="hover:text-amber-400 transition">實景影片</a>
-        <a href="#features" class="hover:text-amber-400 transition">核心亮點</a>
-        <a href="#recommendations" class="hover:text-amber-400 transition">各界推薦</a>
-        <a href="#bridal" class="hover:text-amber-400 transition">婚紗美拍</a>
-        <a href="#events" class="hover:text-amber-400 transition">活動回顧</a>
-        <a href="#plans" class="hover:text-amber-400 transition">飛行體驗</a>
-        <a href="#school" class="hover:text-amber-400 transition">飛行駕訓班</a>
-        <a href="#certification" class="hover:text-amber-400 transition">認證與合規</a>
-        <a href="#instructor" class="hover:text-amber-400 transition">教練資歷</a>
+      <!-- 導覽選單（精簡為 5 大主要類別，增加呼吸感與質感） -->
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold tracking-wide text-slate-300">
+        <a href="#features" class="hover:text-amber-400 transition-colors py-1">核心與體驗</a>
+        <a href="#recommendations" class="hover:text-amber-400 transition-colors py-1">各界推薦</a>
+        <a href="#events" class="hover:text-amber-400 transition-colors py-1">活動展覽</a>
+        <a href="#school" class="hover:text-amber-400 transition-colors py-1">飛行駕訓班</a>
+        <a href="#instructor" class="hover:text-amber-400 transition-colors py-1">認證與教練</a>
       </nav>
-      <a href="#booking" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-2.5 rounded-full transition shadow-lg shadow-amber-500/20 text-sm">
-        預約諮詢
+
+      <a href="#booking" class="bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-extrabold px-6 py-2.5 rounded-full transition-all duration-300 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 text-sm shrink-0">
+        預約諮詢 ↗
       </a>
     </div>
   </header>
@@ -201,63 +199,96 @@
         <div class="bg-slate-950 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/40 transition">
           <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-2xl font-bold mb-6">🖥️</div>
           <h3 class="text-xl font-bold text-white mb-3">智慧雙模航電儀表</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">配備 <strong class="text-slate-200">MGL 數位屏</strong>（可升級 8.5 吋 iEFIS 觸控屏），整合 GPS 與 <strong class="text-amber-400">RDAC 引擎即時監控系統</strong>（CHT/EGT/油壓/油耗），數據精確掌握、一目了然。</p>
+          <p class="text-slate-400 text-sm leading-relaxed">配備 <strong class="text-slate-200">MGL 數位屏</strong>，整合 GPS 與 <strong class="text-amber-400">RDAC 引擎即時監控系統</strong>（CHT/EGT/油壓/油耗），數據精確掌握、一目了然。</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 各大企業福委會好評推薦 與 名人推薦（陳俊生） -->
-  <section id="recommendations" class="py-24 bg-slate-950 border-b border-slate-800/80 px-6">
+  <section id="recommendations" class="py-24 bg-slate-950 border-b border-slate-800/80 px-6 relative overflow-hidden">
     <div class="max-w-7xl mx-auto space-y-20">
       
-      <!-- 1. 各大企業福委會好評推薦 -->
+      <!-- 各大企業福委會好評推薦 -->
       <div>
-        <div class="text-center mb-12">
-          <span class="text-amber-400 text-xs font-bold tracking-widest uppercase mb-2 block">Corporate Trust</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">各大企業福委會 好評推薦</h2>
-          <p class="text-slate-400">業界頂尖巨頭員工活動與特約合作首選品牌</p>
+        <div class="text-center mb-16">
+          <span class="inline-block px-3.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs font-bold tracking-widest uppercase mb-3">
+            Corporate Partnerships & Trust
+          </span>
+          <h2 class="text-3xl md:text-5xl font-black text-white mb-4">各大企業福委會 好評推薦</h2>
+          <p class="text-slate-400 text-base max-w-xl mx-auto">業界頂尖巨頭員工活動、團建特約合作首選品牌</p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="grid lg:grid-cols-2 gap-8">
+          
           <!-- 科技與製造業巨頭 -->
-          <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl relative overflow-hidden">
-            <div class="flex items-center gap-3 mb-6">
-              <span class="text-2xl">🌟</span>
-              <h3 class="text-xl font-bold text-amber-400">科技與製造業巨頭</h3>
+          <div class="bg-gradient-to-b from-slate-900/90 to-slate-950 border border-slate-800 p-8 md:p-10 rounded-3xl shadow-2xl relative group hover:border-amber-500/40 transition-all duration-300">
+            <div class="flex items-center justify-between mb-8 pb-6 border-b border-slate-800/80">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold border border-amber-500/20">🏭</span>
+                <div>
+                  <h3 class="text-xl font-bold text-white">科技與製造業巨頭</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">特約合作 / 員工專屬高空飛行福利</p>
+                </div>
+              </div>
+              <span class="text-xs bg-amber-500/10 text-amber-400 px-3 py-1 rounded-full font-bold border border-amber-500/20">高滿意度認證</span>
             </div>
-            <p class="text-slate-300 text-sm leading-relaxed mb-6 font-medium">勤誠</p>
-            <div class="flex flex-wrap gap-2.5">
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">台積電</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">友達</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">中鋼</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">鴻海</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">廣達</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">和碩</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">技嘉</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">永信</span>
+
+            <div class="mb-6 bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4">
+              <p class="text-xs text-amber-400/90 font-semibold mb-1">⭐ 勤誠興業 專屬合作</p>
+              <p class="text-slate-300 text-xs leading-relaxed">「員工反應極度熱烈！極致震撼的高空視野與極高安全標準，是福委會評選年度最佳員工體驗項目。」</p>
+            </div>
+
+            <div class="space-y-2">
+              <p class="text-xs font-semibold text-slate-400 mb-3">特約合作指標企業成員：</p>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">台積電</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">友達光電</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">中鋼集團</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">鴻海精密</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">廣達電腦</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">和碩聯合</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">技嘉科技</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">永信藥品</div>
+              </div>
             </div>
           </div>
 
           <!-- 金融、航空與服務業領袖 -->
-          <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl relative overflow-hidden">
-            <div class="flex items-center gap-3 mb-6">
-              <span class="text-2xl">🌟</span>
-              <h3 class="text-xl font-bold text-amber-400">金融、航空與服務業領袖</h3>
+          <div class="bg-gradient-to-b from-slate-900/90 to-slate-950 border border-slate-800 p-8 md:p-10 rounded-3xl shadow-2xl relative group hover:border-amber-500/40 transition-all duration-300">
+            <div class="flex items-center justify-between mb-8 pb-6 border-b border-slate-800/80">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 bg-amber-500/10 text-amber-400 rounded-xl flex items-center justify-center text-xl font-bold border border-amber-500/20">✈️</span>
+                <div>
+                  <h3 class="text-xl font-bold text-white">金融、航空與服務業領袖</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">高階主管團建 / 員工獎勵飛行首選</p>
+                </div>
+              </div>
+              <span class="text-xs bg-amber-500/10 text-amber-400 px-3 py-1 rounded-full font-bold border border-amber-500/20">權威推薦</span>
             </div>
-            <div class="flex flex-wrap gap-2.5 mt-4">
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">華航</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">長榮</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">台新</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">滙豐 (HSBC)</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">渣打</span>
-              <span class="px-3.5 py-1.5 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs font-semibold">新光三越</span>
+
+            <div class="mb-6 bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4">
+              <p class="text-xs text-amber-400/90 font-semibold mb-1">⭐ 專業航空從業人員認可</p>
+              <p class="text-slate-300 text-xs leading-relaxed">「連專業民航人員都讚不絕口的完美氣流操控與維護規範，給予夥伴最極致放鬆的御風樂趣。」</p>
+            </div>
+
+            <div class="space-y-2">
+              <p class="text-xs font-semibold text-slate-400 mb-3">特約合作指標企業成員：</p>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3.5 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">中華航空</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3.5 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">長榮航空</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3.5 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">台新金控</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3.5 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">滙豐銀行 (HSBC)</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3.5 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">渣打銀行</div>
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/50 p-3.5 rounded-xl text-center font-bold text-slate-200 text-sm shadow-inner transition">新光三越</div>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
-      <!-- 2. 名人推薦-陳俊生 -->
+      <!-- 名人推薦-陳俊生 -->
       <div class="bg-slate-900 border-2 border-amber-500/40 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
         <div class="grid lg:grid-cols-12 gap-8 items-center">
           <!-- 圖片/推薦海報區 -->
@@ -301,7 +332,7 @@
         <!-- 婚紗照單張大圖 -->
         <div class="lg:col-span-7">
           <div class="rounded-3xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl group">
-            <img src="bridal-photo-1.png" alt="婚紗禮服美拍" class="w-full h-auto object-contain group-hover:scale-102 transition duration-500" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80';">
+            <img src="bridal-photo-1.jpg" alt="婚紗禮服美拍" class="w-full h-auto object-contain group-hover:scale-102 transition duration-500" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80';">
           </div>
         </div>
 
@@ -381,7 +412,6 @@
             <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-[3/4] group flex">
               <img src="chide-3.jpg" alt="啟德50周年機械展照片3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=600&q=80'">
             </div>
-            <!-- 影片容器：加入 aspect-[3/4] 與 flex 確保與左邊照片完全切齊等高 -->
             <div class="rounded-2xl overflow-hidden border border-slate-800 bg-black aspect-[3/4] relative flex items-center justify-center">
               <video class="w-full h-full object-cover" controls loop muted playsinline>
                 <source src="chide.mp4" type="video/mp4">
@@ -770,7 +800,7 @@
       }
     }, { passive: true });
 
-    // 5. 表單送出事件：手機發送至 LINE，電腦打開指定部落格連結
+    // 5. 表單送出事件：手機發送至 LINE，電腦打開指定網址
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
@@ -795,8 +825,8 @@
         const mobileLineUrl = `https://line.me/R/oaMessage/${lineId}/?${encodeURIComponent(message)}`;
         window.location.href = mobileLineUrl;
       } else {
-        // 電腦端：點擊送出直接開啟 Blogger 部落格頁面
-        window.open('https://apsaras8723.blogspot.com/2026/07/blog-post.html', '_blank');
+        // 電腦端：點擊送出直接開啟指定的專屬頁面網址
+        window.open('https://www.why1609.com/fun413/Custom/71', '_blank');
       }
 
       // 提示成功與重設表單
