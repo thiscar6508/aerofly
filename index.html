@@ -19,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
   
   <style>
-    /* 事先定義三種方向的 CSS 鼠標樣式 */
+    /* 事先定義三種方向的 CSS 鼠標樣式（最穩定做法） */
     body, body * {
       cursor: url('cursor-right.png') 16 16, auto !important;
     }
@@ -34,60 +34,14 @@
     }
 
     body { font-family: 'Noto Sans TC', sans-serif; }
-    
-    /* Hero 主視覺背景：沉穩航太藍天空底色 */
     .hero-bg {
-      background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
+      background: linear-gradient(180deg, rgba(10, 15, 30, 0.85) 0%, rgba(5, 7, 15, 0.98) 100%), 
+                  url('https://images.unsplash.com/photo-1508672019048-805479767793?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
     }
-
     .gold-gradient {
       background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-    }
-
-    /* ✈️ 核心動效：動力三角翼由左下角放大掠過至右上角 */
-    .fly-over-trike {
-      position: absolute;
-      width: 550px; /* 放大呈現近距離頭頂掠過感 */
-      height: auto;
-      z-index: 5;
-      pointer-events: none;
-      animation: trikeFlyOver 2.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    }
-
-    @keyframes trikeFlyOver {
-      0% {
-        opacity: 0;
-        transform: translate(-120%, 120vh) scale(1.6) rotate(-15deg);
-      }
-      15% {
-        opacity: 1;
-      }
-      80% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0.15; /* 飛過後留在右上角深處形成帥氣背景 */
-        transform: translate(110vw, -80%) scale(0.6) rotate(5deg);
-      }
-    }
-
-    /* 📝 主標題與內文由下而上緩緩浮現 (delay 1.8s) */
-    .fade-in-text {
-      opacity: 0;
-      animation: textFadeIn 1.5s ease-out 1.6s forwards;
-    }
-
-    @keyframes textFadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     /* 高級感白光點點軌跡樣式 */
@@ -112,7 +66,7 @@
       }
     }
 
-    /* 手機點擊時產生的三角翼小圖示樣式 */
+    /* 手機點擊時產生的三角翼小圖示樣式 (加大 + 停留 1.2 秒) */
     .touch-cursor {
       position: fixed;
       pointer-events: none;
@@ -146,7 +100,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- 1. 頁首導覽列 -->
+  <!-- 1. 頁首導覽列 (新增「體驗方案」，「認證與教練」精確連結至安心保障) -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800/80 shadow-2xl">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       
@@ -156,13 +110,14 @@
       </a>
 
       <!-- 導覽選單 -->
-      <nav class="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-semibold tracking-wide text-slate-300">
+      <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-sm font-semibold tracking-wide text-slate-300">
         <a href="#features" class="hover:text-amber-400 transition-colors py-1">核心與體驗</a>
+        <a href="#plans" class="hover:text-amber-400 transition-colors py-1">體驗方案</a>
         <a href="#recommendations" class="hover:text-amber-400 transition-colors py-1">各界推薦</a>
         <a href="#bridal" class="hover:text-amber-400 transition-colors py-1">禮服美拍</a>
         <a href="#events" class="hover:text-amber-400 transition-colors py-1">活動展覽</a>
         <a href="#school" class="hover:text-amber-400 transition-colors py-1">飛行駕訓班</a>
-        <a href="#instructor" class="hover:text-amber-400 transition-colors py-1">認證與教練</a>
+        <a href="#certification" class="hover:text-amber-400 transition-colors py-1">認證與教練</a>
       </nav>
 
       <a href="#booking" class="bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-extrabold px-6 py-2.5 rounded-full transition-all duration-300 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 text-sm shrink-0">
@@ -171,26 +126,18 @@
     </div>
   </header>
 
-  <!-- 2. Hero 主視覺區 (帶有左下至右上動態飛行掠過 + 標題緩緩浮現) -->
-  <section class="hero-bg min-h-screen pt-28 pb-20 flex items-center justify-center relative overflow-hidden px-6">
-    
-    <!-- 動態掠過之動力三角翼照片 (以 S__147103753.jpg 為基礎) -->
-    <img src="S__147103753.jpg" alt="動力三角翼飛行掠過" class="fly-over-trike drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)]">
-
-    <div class="max-w-4xl mx-auto text-center relative z-10 fade-in-text">
-      <span class="inline-block px-4 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs tracking-widest font-semibold uppercase mb-6 shadow-lg shadow-amber-500/10">
+  <!-- Hero 主視覺區 -->
+  <section class="hero-bg min-h-screen pt-36 pb-20 flex items-center justify-center relative overflow-hidden px-6">
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+      <span class="inline-block px-4 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs tracking-widest font-semibold uppercase mb-6">
         Apsaras Aerospace Technology
       </span>
-      
-      <!-- 劃破天際 定義你的自由高度 -->
-      <h1 class="text-5xl md:text-7xl font-black text-white leading-tight mb-8 drop-shadow-lg">
+      <h1 class="text-5xl md:text-7xl font-black text-white leading-tight mb-8">
         劃破天際<br><span class="gold-gradient">定義你的自由高度</span>
       </h1>
-      
       <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
         國家級頂尖教練親自帶飛 × 美國原裝驗證動力三角翼。<br class="hidden sm:inline">頭手可自由伸出機外，盡情拍照攝影，輕鬆享受絕美天空之旅！
       </p>
-      
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="#booking" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-8 py-4 rounded-xl text-lg transition shadow-xl shadow-amber-500/20">
           立即預約現場體驗
@@ -264,7 +211,7 @@
   <section id="recommendations" class="py-24 bg-slate-950 border-b border-slate-800/80 px-6 relative overflow-hidden">
     <div class="max-w-7xl mx-auto space-y-20">
       
-      <!-- 各大企業福委會好評推薦 -->
+      <!-- 1. 各大企業福委會好評推薦 -->
       <div>
         <div class="text-center mb-16">
           <span class="inline-block px-3.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs font-bold tracking-widest uppercase mb-3">
@@ -290,7 +237,7 @@
 
             <div class="mb-6 bg-slate-950/80 border border-slate-800/80 rounded-2xl p-4">
               <p class="text-xs text-amber-400/90 font-semibold mb-1">⭐ 勤誠興業 專屬合作</p>
-              <p class="text-slate-300 text-xs leading-relaxed">「員工反應極度熱烈！極致震撼的高空視野與極高安全標準，是福委會評選年度最佳員工體驗項目。」</p>
+              <p class="text-slate-300 text-xs leading-relaxed">「員工證超優惠！極致震撼的高空視野與極高安全標準，福委會實在太厲害了。」</p>
             </div>
 
             <div class="space-y-2">
@@ -342,7 +289,7 @@
         </div>
       </div>
 
-      <!-- 名人推薦-陳俊生 -->
+      <!-- 2. 名人推薦-陳俊生 -->
       <div class="bg-slate-900 border-2 border-amber-500/40 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
         <div class="grid lg:grid-cols-12 gap-8 items-center">
           <div class="lg:col-span-5 rounded-2xl overflow-hidden border border-slate-800 shadow-xl bg-black">
@@ -402,7 +349,7 @@
     </div>
   </section>
 
-  <!-- 展覽回顧區 -->
+  <!-- 展覽回顧區 (調換順序：啟德吊車展在前、台北航太展在後) -->
   <section id="events" class="py-24 bg-slate-950 border-b border-slate-800/80 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
@@ -412,36 +359,7 @@
       </div>
 
       <div class="space-y-16">
-        <!-- 活動 1：第16屆台北國際航太暨國防工業展 -->
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-2xl">
-          <div class="mb-8 border-b border-slate-800 pb-6">
-            <span class="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-md text-xs font-bold mb-3">重點展覽實錄</span>
-            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">第16屆台北國際航太暨國防工業展</h3>
-            <p class="text-slate-300 text-sm md:text-base leading-relaxed">
-              聚焦4大主題策展，透過5大主題館、國家館、多元展覽周邊活動，串連來自10國，近300家企業參展，呈現國防航太產業「轉型－創新－結盟」三大亮點，吸引超過3萬人次進場參觀，創下16屆以來最大展出規模。
-            </p>
-          </div>
-
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group flex">
-              <img src="taipei-defense-1.jpg" alt="台北航太展照片1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80'">
-            </div>
-            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group flex">
-              <img src="taipei-defense-2.jpg" alt="台北航太展照片2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80'">
-            </div>
-            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group flex">
-              <img src="taipei-defense-3.jpg" alt="台北航太展照片3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80'">
-            </div>
-            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-black aspect-4/3 relative flex items-center justify-center">
-              <video class="w-full h-full object-cover" controls loop muted playsinline>
-                <source src="taipei-defense.mp4" type="video/mp4">
-                您的瀏覽器不支援影片播放。
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <!-- 活動 2：竹北吊車大王啟德50周年機械展 -->
+        <!-- 展覽 1 (前)：竹北吊車大王啟德50周年機械展 -->
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-2xl">
           <div class="mb-8 border-b border-slate-800 pb-6">
             <span class="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-md text-xs font-bold mb-3">大型展覽亮點</span>
@@ -464,6 +382,35 @@
             <div class="rounded-2xl overflow-hidden border border-slate-800 bg-black aspect-[3/4] relative flex items-center justify-center">
               <video class="w-full h-full object-cover" controls loop muted playsinline>
                 <source src="chide.mp4" type="video/mp4">
+                您的瀏覽器不支援影片播放。
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <!-- 展覽 2 (後)：第16屆台北國際航太暨國防工業展 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-2xl">
+          <div class="mb-8 border-b border-slate-800 pb-6">
+            <span class="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-md text-xs font-bold mb-3">重點展覽實錄</span>
+            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">第16屆台北國際航太暨國防工業展</h3>
+            <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+              聚焦4大主題策展，透過5大主題館、國家館、多元展覽周邊活動，串連來自10國，近300家企業參展，呈現國防航太產業「轉型－創新－結盟」三大亮點，吸引超過3萬人次進場參觀，創下16屆以來最大展出規模。
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group flex">
+              <img src="taipei-defense-1.jpg" alt="台北航太展照片1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80'">
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group flex">
+              <img src="taipei-defense-2.jpg" alt="台北航太展照片2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80'">
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group flex">
+              <img src="taipei-defense-3.jpg" alt="台北航太展照片3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80'">
+            </div>
+            <div class="rounded-2xl overflow-hidden border border-slate-800 bg-black aspect-4/3 relative flex items-center justify-center">
+              <video class="w-full h-full object-cover" controls loop muted playsinline>
+                <source src="taipei-defense.mp4" type="video/mp4">
                 您的瀏覽器不支援影片播放。
               </video>
             </div>
@@ -587,7 +534,7 @@
     </div>
   </section>
 
-  <!-- 民航局檢驗合格證與合規資訊 -->
+  <!-- 民航局檢驗合格證與合規資訊 (安心保障) -->
   <section id="certification" class="py-24 px-6 max-w-5xl mx-auto">
     <div class="text-center mb-16">
       <span class="text-amber-400 text-xs font-bold tracking-widest uppercase mb-2 block">Safety & Compliance</span>
@@ -674,7 +621,7 @@
     </div>
   </section>
 
-  <!-- 預約體驗表單區 -->
+  <!-- 預約體驗表單區 (已改為攤開式選擇題/複選卡片型式 Checkbox) -->
   <section id="booking" class="py-24 bg-slate-900/80 border-t border-slate-800 px-6">
     <div class="max-w-xl mx-auto bg-slate-950 p-8 sm:p-10 rounded-3xl border border-slate-800 shadow-2xl">
       <div class="text-center mb-8">
@@ -726,7 +673,7 @@
               <input type="checkbox" name="bookingItem" value="動力三角翼 QA 與諮詢" class="w-4 h-4 rounded accent-amber-500">
               <div class="text-sm">
                 <p class="font-bold text-white">動力三角翼 QA 與諮詢</p>
-                <p class="text-xs text-slate-400">想開飛機還是買飛機？各種疑問專人解答</p>
+                <p class="text-xs text-slate-400">想開飛機還是買飛機？福委會聯繫窗口？各種疑問專人解答</p>
               </div>
             </label>
 
