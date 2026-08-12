@@ -49,7 +49,7 @@
     /* ✈️ 動力三角翼極速劃過 */
     .fly-over-trike {
       position: absolute;
-      width: 1400px; /* 適中俐落的實景比例尺寸 */
+      width: 1400px;
       max-width: 110vw;
       height: auto;
       z-index: 20;
@@ -73,27 +73,26 @@
       }
     }
 
-    /* ✨ 飛過後灑落的純白與金粉星光點點 */
-    .falling-stardust {
+    /* ✨ 純白星芒為主、金粉為輔的奢華星光特效 */
+    .pure-stardust {
       position: absolute;
-      border-radius: 50%;
       pointer-events: none;
       z-index: 15;
-      animation: starFall 1.8s ease-out forwards;
+      animation: starBurst 1.6s ease-out forwards;
     }
 
-    @keyframes starFall {
+    @keyframes starBurst {
       0% {
         opacity: 0;
-        transform: scale(0.2) translateY(-20px);
+        transform: scale(0.2) rotate(0deg);
       }
-      30% {
+      35% {
         opacity: 1;
-        transform: scale(1.4) translateY(0);
+        transform: scale(1.3) rotate(45deg);
       }
       100% {
         opacity: 0;
-        transform: scale(0.5) translateY(50px);
+        transform: scale(0.4) rotate(90deg) translateY(40px);
       }
     }
 
@@ -231,7 +230,7 @@
     </div>
   </header>
 
-  <!-- 2. Hero 主視覺區 (純白為主、金粉為輔的星光灑落特效) -->
+  <!-- 2. Hero 主視覺區 (純白星芒為主、金粉為輔) -->
   <section id="heroSection" class="hero-bg min-h-screen pt-28 pb-20 flex items-center justify-center relative overflow-hidden px-6">
     
     <!-- 巨型去背動力三角翼 -->
@@ -825,14 +824,14 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 腳本區域：純白為主金粉為輔的盛大星光灑落特效引擎 -->
+  <!-- 腳本區域：純白星芒為主金粉為輔的星光特效引擎 -->
   <script>
     // 預載圖片以防瀏覽器延遲
     const preloadLeft = new Image(); preloadLeft.src = 'cursor-left.png';
     const preloadRight = new Image(); preloadRight.src = 'cursor-right.png';
     const preloadVert = new Image(); preloadVert.src = 'cursor-vertical.png';
 
-    // ✨ 打造以「純白為主、金粉為輔」的星光灑落特效引擎
+    // ✨ 純白星芒為主、金粉為輔的盛大星光特效引擎
     const trikeImg = document.getElementById('flyingTrike');
     const heroSec = document.getElementById('heroSection');
 
@@ -841,39 +840,41 @@
         const rect = trikeImg.getBoundingClientRect();
         const heroRect = heroSec.getBoundingClientRect();
 
-        // 當機身在 Hero 畫面中時，沿著軌跡與四周不斷灑落星光
         if (rect.top < heroRect.bottom && rect.bottom > heroRect.top && rect.left < heroRect.right && rect.right > heroRect.left) {
           
-          for (let i = 0; i < 5; i++) {
-            const star = document.createElement('div');
-            star.className = 'falling-stardust';
+          for (let i = 0; i < 6; i++) {
+            const stardust = document.createElement('div');
+            stardust.className = 'pure-stardust';
             
-            const size = Math.random() * 12 + 6; // 粒子大小 6px ~ 18px
-            star.style.width = size + 'px';
-            star.style.height = size + 'px';
+            const size = Math.random() * 16 + 8; // 粒子尺寸 8px ~ 24px
+            stardust.style.width = size + 'px';
+            stardust.style.height = size + 'px';
 
-            // 比例：85% 純白耀眼光芒、15% 奢華金粉
+            // 比例：85% 純白炫目星芒，15% 精緻金粉
             const isGold = Math.random() < 0.15;
             if (isGold) {
-              star.style.background = 'radial-gradient(circle, #fde047 0%, #d97706 70%, transparent 100%)';
-              star.style.boxShadow = '0 0 15px #f59e0b, 0 0 25px #fbbf24';
+              stardust.innerHTML = '✦';
+              stardust.style.color = '#f59e0b';
+              stardust.style.textShadow = '0 0 10px #fbbf24, 0 0 20px #d97706';
             } else {
-              star.style.background = 'radial-gradient(circle, #ffffff 0%, #38bdf8 60%, transparent 100%)';
-              star.style.boxShadow = '0 0 18px #ffffff, 0 0 30px #bae6fd';
+              stardust.innerHTML = '★';
+              stardust.style.color = '#ffffff';
+              stardust.style.textShadow = '0 0 12px #ffffff, 0 0 25px #38bdf8';
             }
+            stardust.style.fontSize = (size * 1.2) + 'px';
 
-            // 隨機灑落在機身周圍與身後軌跡
-            const dropX = rect.left + rect.width * 0.3 + (Math.random() * 400 - 200);
-            const dropY = rect.top + rect.height * 0.5 + (Math.random() * 300 - 150);
+            // 隨機灑落在機身周圍與飛行軌跡中
+            const dropX = rect.left + rect.width * 0.3 + (Math.random() * 500 - 250);
+            const dropY = rect.top + rect.height * 0.5 + (Math.random() * 350 - 175);
 
-            star.style.left = dropX + 'px';
-            star.style.top = dropY + 'px';
+            stardust.style.left = dropX + 'px';
+            stardust.style.top = dropY + 'px';
 
-            document.body.appendChild(star);
-            setTimeout(() => { star.remove(); }, 1800);
+            document.body.appendChild(stardust);
+            setTimeout(() => { stardust.remove(); }, 1600);
           }
         }
-      }, 25);
+      }, 20);
     }
 
     // 1. 三影片切換邏輯
