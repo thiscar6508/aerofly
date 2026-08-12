@@ -46,22 +46,22 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* ✈️ 核心動效：無停留！1.8秒極速穿過畫面正中央 */
+    /* ✈️ 核心動效：放大 1.2 倍（總共 5800px），一進頁面瞬間滿開極速劃過 */
     .fly-over-trike {
       position: absolute;
-      width: 4200px;
-      max-width: 320vw;
+      width: 5800px;
+      max-width: 400vw;
       height: auto;
       z-index: 20;
       pointer-events: none;
       filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.95));
-      animation: trikeDirectFlyOver 1.8s cubic-bezier(0.1, 0.7, 0.1, 1) forwards;
+      animation: trikeInstantFly 1.5s linear forwards;
     }
 
-    @keyframes trikeDirectFlyOver {
+    @keyframes trikeInstantFly {
       0% {
         opacity: 1;
-        transform: translate(-160%, 160vh) rotate(-22deg);
+        transform: translate(-120%, 120vh) rotate(-20deg);
       }
       50% {
         opacity: 1;
@@ -69,30 +69,30 @@
       }
       100% {
         opacity: 1;
-        transform: translate(160vw, -160vh) rotate(-2deg);
+        transform: translate(140vw, -140vh) rotate(-2deg);
       }
     }
 
-    /* 📝 梯次淡入動畫定義 (配合極速飛過時間) */
+    /* 📝 標題梯次淡入動畫 */
     .fade-step-1 {
       opacity: 0;
-      animation: stepFadeIn 1s ease-out 0.8s forwards;
+      animation: stepFadeIn 0.8s ease-out 0.4s forwards;
     }
 
     .fade-step-2 {
       opacity: 0;
-      animation: stepFadeIn 1s ease-out 1.5s forwards;
+      animation: stepFadeIn 0.8s ease-out 0.9s forwards;
     }
 
     .fade-step-3 {
       opacity: 0;
-      animation: stepFadeIn 1s ease-out 2.2s forwards;
+      animation: stepFadeIn 0.8s ease-out 1.4s forwards;
     }
 
     @keyframes stepFadeIn {
       0% {
         opacity: 0;
-        transform: translateY(25px);
+        transform: translateY(20px);
       }
       100% {
         opacity: 1;
@@ -182,10 +182,10 @@
     </div>
   </header>
 
-  <!-- 2. Hero 主視覺區 (無停留！直接秒速飛過畫面) -->
+  <!-- 2. Hero 主視覺區 (一進頁面瞬間極速飛過) -->
   <section class="hero-bg min-h-screen pt-28 pb-20 flex items-center justify-center relative overflow-hidden px-6">
     
-    <!-- 去背巨型動力三角翼 (無停留直接極速掠過) -->
+    <!-- 巨型去背動力三角翼 (一進頁面立即極速飛過) -->
     <img src="video.png" alt="巨型動力三角翼" class="fly-over-trike">
 
     <div class="max-w-4xl mx-auto text-center relative z-10 space-y-6">
@@ -379,9 +379,9 @@
             <h3 class="text-3xl font-black text-white">知名藝人 · 陳俊生</h3>
             
             <blockquote class="bg-slate-950 border-l-4 border-amber-500 p-6 rounded-r-2xl text-slate-200 leading-relaxed font-light text-base md:text-lg">
-              「Hi 大家好！我是陳俊生！<br>
-              剛體驗完台灣唯一的動力三角翼飛行，有夠刺激的！！<br>
-              它不是密閉式機艙，整個人是真的在天空裡！風直接打在臉上的那一瞬間，你會覺得～哇！原來飛行可以這麼『真實』！」
+              <div>「Hi 大家好！我是陳俊生！</div>
+              <div>剛體驗完台灣唯一的動力三角翼飛行，有夠刺激的！！</div>
+              <div>它不是密閉式機艙，整個人是真的在天空裡！風直接打在臉上的那一瞬間，你會覺得～哇！原來飛行可以這麼『真實』！」</div>
             </blockquote>
 
             <div class="p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-300 font-bold text-lg md:text-xl text-center">
