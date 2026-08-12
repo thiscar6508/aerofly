@@ -100,7 +100,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 antialiased selection:bg-amber-500 selection:text-black">
 
-  <!-- 1. 優化後的頁首導覽列 (清爽不擁擠，高級質感) -->
+  <!-- 1. 頁首導覽列 (新增「禮服美拍」) -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800/80 shadow-2xl">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       
@@ -109,10 +109,11 @@
         <img src="LOGOTRA.png" alt="飛天航太 LOGO" class="h-12 sm:h-14 w-auto object-contain">
       </a>
 
-      <!-- 導覽選單（精簡為 5 大主要類別，增加呼吸感與質感） -->
-      <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold tracking-wide text-slate-300">
+      <!-- 導覽選單（新增「禮服美拍」） -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-semibold tracking-wide text-slate-300">
         <a href="#features" class="hover:text-amber-400 transition-colors py-1">核心與體驗</a>
         <a href="#recommendations" class="hover:text-amber-400 transition-colors py-1">各界推薦</a>
+        <a href="#bridal" class="hover:text-amber-400 transition-colors py-1">禮服美拍</a>
         <a href="#events" class="hover:text-amber-400 transition-colors py-1">活動展覽</a>
         <a href="#school" class="hover:text-amber-400 transition-colors py-1">飛行駕訓班</a>
         <a href="#instructor" class="hover:text-amber-400 transition-colors py-1">認證與教練</a>
@@ -209,7 +210,7 @@
   <section id="recommendations" class="py-24 bg-slate-950 border-b border-slate-800/80 px-6 relative overflow-hidden">
     <div class="max-w-7xl mx-auto space-y-20">
       
-      <!-- 各大企業福委會好評推薦 -->
+      <!-- 1. 各大企業福委會好評推薦 -->
       <div>
         <div class="text-center mb-16">
           <span class="inline-block px-3.5 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs font-bold tracking-widest uppercase mb-3">
@@ -319,7 +320,7 @@
     </div>
   </section>
 
-  <!-- 3. 婚紗禮服美拍專區 -->
+  <!-- 2. 婚紗禮服美拍專區 (圖檔已更新為 bridal-photo-1.png) -->
   <section id="bridal" class="py-24 bg-slate-900/60 border-b border-slate-800/80 px-6">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-16">
@@ -329,10 +330,10 @@
       </div>
 
       <div class="grid lg:grid-cols-12 gap-8 items-center">
-        <!-- 婚紗照單張大圖 -->
+        <!-- 婚紗照單張大圖 (.png 檔名更新) -->
         <div class="lg:col-span-7">
           <div class="rounded-3xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl group">
-            <img src="bridal-photo-1.jpg" alt="婚紗禮服美拍" class="w-full h-auto object-contain group-hover:scale-102 transition duration-500" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80';">
+            <img src="bridal-photo-1.png" alt="婚紗禮服美拍" class="w-full h-auto object-contain group-hover:scale-102 transition duration-500" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80';">
           </div>
         </div>
 
@@ -362,7 +363,7 @@
       </div>
 
       <div class="space-y-16">
-        <!-- 活動 1：第16屆台北國際航太暨國防工業展 (橫式 4:3 100% 等高絕對切齊) -->
+        <!-- 活動 1：第16屆台北國際航太暨國防工業展 -->
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-2xl">
           <div class="mb-8 border-b border-slate-800 pb-6">
             <span class="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-md text-xs font-bold mb-3">重點展覽實錄</span>
@@ -382,7 +383,6 @@
             <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 aspect-4/3 group flex">
               <img src="taipei-defense-3.jpg" alt="台北航太展照片3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80'">
             </div>
-            <!-- 影片容器：加入 aspect-4/3 與 flex 確保與照片完全切齊等高 -->
             <div class="rounded-2xl overflow-hidden border border-slate-800 bg-black aspect-4/3 relative flex items-center justify-center">
               <video class="w-full h-full object-cover" controls loop muted playsinline>
                 <source src="taipei-defense.mp4" type="video/mp4">
@@ -392,7 +392,7 @@
           </div>
         </div>
 
-        <!-- 活動 2：竹北吊車大王啟德50周年機械展 (直式 3:4 100% 等高絕對切齊) -->
+        <!-- 活動 2：竹北吊車大王啟德50周年機械展 -->
         <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-2xl">
           <div class="mb-8 border-b border-slate-800 pb-6">
             <span class="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/30 rounded-md text-xs font-bold mb-3">大型展覽亮點</span>
