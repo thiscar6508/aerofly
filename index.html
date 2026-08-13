@@ -73,34 +73,6 @@
       }
     }
 
-    /* ✨ 如同雪光般飄落的十字星芒與金粉（具備霧化與呼吸閃爍效果） */
-    .snow-stardust {
-      position: absolute;
-      pointer-events: none;
-      z-index: 50;
-      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
-      animation: snowFallAndBlink 2.2s ease-in-out forwards;
-    }
-
-    @keyframes snowFallAndBlink {
-      0% {
-        opacity: 0;
-        transform: scale(0.2) translateY(-20px) rotate(0deg);
-      }
-      30% {
-        opacity: var(--target-opacity, 0.8);
-        transform: scale(1.2) translateY(20px) rotate(20deg);
-      }
-      70% {
-        opacity: calc(var(--target-opacity, 0.8) * 0.4); /* 呼吸閃爍明暗交替 */
-        transform: scale(0.9) translateY(60px) rotate(45deg);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0.4) translateY(120px) rotate(90deg);
-      }
-    }
-
     /* 📱 手機版自動調慢速度 */
     @media (max-width: 768px) {
       .fly-over-trike {
@@ -235,9 +207,12 @@
     </div>
   </header>
 
-  <!-- 2. Hero 主視覺區 (雪光般飄落的星芒與金粉) -->
+  <!-- 2. Hero 主視覺區 (內建高效 Canvas 雪光星芒與金粉引擎) -->
   <section id="heroSection" class="hero-bg min-h-screen pt-28 pb-20 flex items-center justify-center relative overflow-hidden px-6">
     
+    <!-- Canvas 畫布層：專門渲染純白星芒與金粉 -->
+    <canvas id="stardustCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-15"></canvas>
+
     <!-- 巨型去背動力三角翼 -->
     <img id="flyingTrike" src="video.png" alt="巨型動力三角翼" class="fly-over-trike">
 
@@ -829,60 +804,103 @@
     <p>© 2026 飛天航太科技股份有限公司 APSARAS AEROSPACE TECHNOLOGY INC. 版權所有</p>
   </footer>
 
-  <!-- 腳本區域：極致細膩的雪光星芒特效引擎 -->
+  <!-- 腳本區域：高效 Canvas 雪光星芒與金粉渲染引擎 -->
   <script>
     // 預載圖片以防瀏覽器延遲
     const preloadLeft = new Image(); preloadLeft.src = 'cursor-left.png';
     const preloadRight = new Image(); preloadRight.src = 'cursor-right.png';
     const preloadVert = new Image(); preloadVert.src = 'cursor-vertical.png';
 
-    // ✨ 打造如雪光般飄落的純白十字星芒與精緻金粉
+    // 🌟 高效 Canvas 粒子引擎：沿著機身軌跡與四周渲染雪光星芒與金粉
+    const canvas = document.getElementById('stardustCanvas');
+    const ctx = canvas.getContext('2d');
     const trikeImg = document.getElementById('flyingTrike');
     const heroSec = document.getElementById('heroSection');
 
-    if (trikeImg && heroSec) {
-      setInterval(() => {
+    function resizeCanvas() {
+      if (heroSec && canvas) {
+        canvas.width = heroSec.offsetWidth;
+        canvas.height = heroSec.offsetHeight;
+      }
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    let particles = [];
+
+    function addParticles(x, y) {
+      for (let i = 0; i < 4; i++) {
+        const isGold = Math.random() < 0.25; // 25% 金粉，75% 純白星芒
+        particles.push({
+          x: x + (Math.random() * 400 - 200),
+          y: y + (Math.random() * 300 - 150),
+          size: Math.random() * 8 + 4, // 柔和精緻的小尺寸
+          alpha: Math.random() * 0.6 + 0.2, // 霧化若隱若現
+          maxAlpha: Math.random() * 0.5 + 0.3,
+          decay: Math.random() * 0.015 + 0.008,
+          vx: (Math.random() - 0.5) * 1.5,
+          vy: Math.random() * 1.5 + 0.5, // 像雪光般微微向下飄落
+          isGold: isGold,
+          rotation: Math.random() * Math.PI,
+          vRot: (Math.random() - 0.5) * 0.03
+        });
+      }
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (trikeImg && heroSec) {
         const rect = trikeImg.getBoundingClientRect();
         const heroRect = heroSec.getBoundingClientRect();
 
-        if (rect.top < heroRect.bottom && rect.bottom > heroRect.top && rect.left < heroRect.right && rect.right > heroRect.left) {
-          
-          for (let i = 0; i < 6; i++) {
-            const stardust = document.createElement('div');
-            stardust.className = 'pure-stardust';
-            
-            const size = Math.random() * 8 + 4; // 精緻細小的尺寸 (4px ~ 12px)
-            stardust.style.width = size + 'px';
-            stardust.style.height = size + 'px';
-
-            // 比例：85% 純白十字星芒為主、15% 質感金粉為輔
-            const isGold = Math.random() < 0.15;
-            if (isGold) {
-              stardust.innerHTML = Math.random() > 0.5 ? '✦' : '✧';
-              stardust.style.color = '#fde047'; 
-              stardust.style.textShadow = '0 0 6px rgba(245, 158, 11, 0.5)';
-              stardust.style.setProperty('--max-opacity', (Math.random() * 0.3 + 0.3).toFixed(2));
-            } else {
-              stardust.innerHTML = Math.random() > 0.4 ? '✦' : '★';
-              stardust.style.color = '#ffffff'; 
-              stardust.style.textShadow = '0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.3)';
-              stardust.style.setProperty('--max-opacity', (Math.random() * 0.4 + 0.2).toFixed(2));
-            }
-            stardust.style.fontSize = (size * 1.1) + 'px';
-
-            // 隨機灑落在機身周圍與身後軌跡
-            const dropX = rect.left + rect.width * 0.3 + (Math.random() * 600 - 300);
-            const dropY = rect.top + rect.height * 0.5 + (Math.random() * 400 - 200);
-
-            stardust.style.left = dropX + 'px';
-            stardust.style.top = dropY + 'px';
-
-            document.body.appendChild(stardust);
-            setTimeout(() => { stardust.remove(); }, 1600);
-          }
+        // 當機身在畫面中時持續在身後與周圍產生粒子
+        if (rect.top < heroRect.bottom && rect.bottom > heroRect.top) {
+          const centerX = rect.left - heroRect.left + rect.width * 0.4;
+          const centerY = rect.top - heroRect.top + rect.height * 0.4;
+          addParticles(centerX, centerY);
         }
-      }, 25);
+      }
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        let p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= p.decay;
+        p.rotation += p.vRot;
+
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.globalAlpha = p.alpha;
+
+        if (p.isGold) {
+          ctx.fillStyle = '#fde047';
+          ctx.shadowColor = '#f59e0b';
+          ctx.shadowBlur = 8;
+        } else {
+          ctx.fillStyle = '#ffffff';
+          ctx.shadowColor = '#ffffff';
+          ctx.shadowBlur = 10;
+        }
+
+        // 畫出精緻十字星芒
+        ctx.font = `${p.size * 1.5}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(Math.random() > 0.5 ? '✦' : '✧', 0, 0);
+
+        ctx.restore();
+      }
+
+      requestAnimationFrame(animateCanvas);
     }
+    animateCanvas();
 
     // 1. 三影片切換邏輯
     function switchVideo(videoSrc, mode, activeBtnId) {
